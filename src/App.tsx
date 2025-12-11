@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 
-// --- ICONS (FIXED: All multi-path icons wrapped in fragments) ---
+// --- ICONS ---
 const Icon = ({ name, size = 18, className = "" }: any) => {
   const icons: any = {
     check: <path d="M20 6L9 17l-5-5" />,
@@ -113,6 +113,59 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
         <line x1="12" y1="15" x2="12" y2="3" />
       </>
     ),
+    headphones: (
+      <>
+        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+      </>
+    ),
+    cloud: (
+      <path d="M17.5 19c0-1.7-1.3-3-3-3h-1.1c-.2-2.3-2.1-4-4.4-4-1.8 0-3.3 1-4 2.5-2.2.3-3.7 2.4-3.4 4.6.3 1.9 2 3.3 3.9 3.3h12c1.7 0 3-1.3 3-3z" />
+    ),
+    tree: (
+      <>
+        <path d="M12 10v10" />
+        <path d="M12 10l4-2" />
+        <path d="M12 10l-4-2" />
+        <path d="M12 20V10" />
+        <path d="M7 8l5-6 5 6" />
+        <path d="M6 14l6-6 6 6" />
+      </>
+    ),
+    water: (
+      <>
+        <path d="M2 12h20" />
+        <path d="M2 16h20" />
+        <path d="M2 8h20" />
+      </>
+    ),
+    lock: (
+      <>
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </>
+    ),
+    user: (
+      <>
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </>
+    ),
+    clock: (
+      <>
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </>
+    ),
+    coffee: (
+      <>
+        <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
+        <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
+        <line x1="6" y1="1" x2="6" y2="4" />
+        <line x1="10" y1="1" x2="10" y2="4" />
+        <line x1="14" y1="1" x2="14" y2="4" />
+      </>
+    ),
   };
   return (
     <svg
@@ -132,15 +185,18 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
   );
 };
 
-// --- AUDIO SOURCES ---
+// --- AUDIO SOURCES (UPDATED FOR RELIABILITY) ---
 const AUDIO_TRACKS = {
-  lofi: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3?filename=lofi-study-112191.mp3",
-  rain: "https://cdn.pixabay.com/download/audio/2022/04/27/audio_65a6e612f0.mp3?filename=soft-rain-ambient-111154.mp3",
+  lofi: "https://cdn.pixabay.com/download/audio/2022/05/27/audio_1808fbf07a.mp3",
+  rain: "https://cdn.pixabay.com/download/audio/2022/01/18/audio_d0a13f69d2.mp3",
   forest:
-    "https://cdn.pixabay.com/download/audio/2021/09/06/audio_03d6d52583.mp3?filename=forest-lullaby-110624.mp3",
+    "https://cdn.pixabay.com/download/audio/2021/08/09/audio_243457a804.mp3",
   waves:
-    "https://cdn.pixabay.com/download/audio/2021/08/09/audio_00832bb57a.mp3?filename=ocean-waves-11167.mp3",
+    "https://cdn.pixabay.com/download/audio/2021/08/09/audio_00832bb57a.mp3",
 };
+
+const ALARM_SOUND =
+  "https://cdn.pixabay.com/download/audio/2021/08/04/audio_0625c153e2.mp3";
 
 // --- CONFIG ---
 const THEMES: any = {
@@ -174,6 +230,14 @@ const THEMES: any = {
   },
 };
 
+const TAGS_STYLES: any = {
+  Work: "bg-blue-100 text-blue-700 dark:bg-blue-900 dark:text-blue-300",
+  Study:
+    "bg-purple-100 text-purple-700 dark:bg-purple-900 dark:text-purple-300",
+  Life: "bg-emerald-100 text-emerald-700 dark:bg-emerald-900 dark:text-emerald-300",
+  Urgent: "bg-red-100 text-red-700 dark:bg-red-900 dark:text-red-300",
+};
+
 // --- AUDIO PLAYER COMPONENT ---
 const AudioPlayer = ({
   isPlaying,
@@ -190,7 +254,8 @@ const AudioPlayer = ({
       if (el) {
         if (isPlaying) {
           el.volume = volumes[key] || 0;
-          if (volumes[key] > 0 && el.paused) el.play().catch(() => {});
+          if (volumes[key] > 0 && el.paused)
+            el.play().catch((e) => console.log("Audio play prevented:", e));
           if (volumes[key] === 0) el.pause();
         } else {
           el.pause();
@@ -209,6 +274,7 @@ const AudioPlayer = ({
           }}
           src={url}
           loop
+          crossOrigin="anonymous"
         />
       ))}
     </>
@@ -216,55 +282,117 @@ const AudioPlayer = ({
 };
 
 export default function App() {
-  // --- STATE ---
+  // --- USER ACCOUNT STATE ---
+  const [user, setUser] = useState<any>(() =>
+    JSON.parse(localStorage.getItem("zenUser") || "null")
+  );
+
+  // --- APP STATE ---
   const [tasks, setTasks] = useState<any[]>(() =>
-    JSON.parse(localStorage.getItem("zenTasks_v4") || "[]")
+    JSON.parse(localStorage.getItem("zenTasks_v5") || "[]")
   );
   const [habits, setHabits] = useState<any[]>(() =>
     JSON.parse(
-      localStorage.getItem("zenHabits_v4") ||
+      localStorage.getItem("zenHabits_v5") ||
         '[{"id":1,"text":"Drink Water","completed":false}]'
     )
   );
   const [availableTags, setAvailableTags] = useState<string[]>(() =>
     JSON.parse(
-      localStorage.getItem("zenTags_v4") ||
+      localStorage.getItem("zenTags_v5") ||
         '["Work", "Study", "Life", "Urgent"]'
     )
   );
 
+  // Preferences
+  const [theme, setTheme] = useState(
+    () => localStorage.getItem("zenTheme") || "violet"
+  );
+  const [darkMode, setDarkMode] = useState(
+    () => localStorage.getItem("zenDark") === "true"
+  );
+  const [volumes, setVolumes] = useState<any>(() =>
+    JSON.parse(
+      localStorage.getItem("zenVolumes") ||
+        JSON.stringify({ lofi: 0.5, rain: 0, forest: 0, waves: 0 })
+    )
+  );
+
   const [view, setView] = useState<"list" | "3day" | "month">("list");
-  const [theme, setTheme] = useState("violet");
-  const [darkMode, setDarkMode] = useState(false);
   const [currentDate, setCurrentDate] = useState(new Date());
 
-  // Audio & Timer
-  const [timerTime, setTimerTime] = useState(25 * 60);
+  // --- TIMER STATE (NEW UPGRADE) ---
+  const [timerMode, setTimerMode] = useState<"focus" | "break">("focus");
+  const [workDuration, setWorkDuration] = useState(() =>
+    parseInt(localStorage.getItem("zenWorkDur") || "25")
+  );
+  const [breakDuration, setBreakDuration] = useState(() =>
+    parseInt(localStorage.getItem("zenBreakDur") || "5")
+  );
+  const [timerTime, setTimerTime] = useState(workDuration * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
-  const [showSoundMixer, setShowSoundMixer] = useState(false);
-  const [volumes, setVolumes] = useState<any>({
-    lofi: 0.5,
-    rain: 0,
-    forest: 0,
-    waves: 0,
-  });
 
-  // Inputs & Modals
+  // UI States
+  const [showSoundMixer, setShowSoundMixer] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [selectedTag, setSelectedTag] = useState("Life");
   const [showSettings, setShowSettings] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
 
+  // Login Inputs
+  const [loginName, setLoginName] = useState("");
+  const [loginPin, setLoginPin] = useState("");
+  const [loginError, setLoginError] = useState("");
+
   // --- PERSISTENCE ---
   useEffect(() => {
-    localStorage.setItem("zenTasks_v4", JSON.stringify(tasks));
-  }, [tasks]);
+    if (user) localStorage.setItem("zenTasks_v5", JSON.stringify(tasks));
+  }, [tasks, user]);
   useEffect(() => {
-    localStorage.setItem("zenHabits_v4", JSON.stringify(habits));
-  }, [habits]);
+    if (user) localStorage.setItem("zenHabits_v5", JSON.stringify(habits));
+  }, [habits, user]);
   useEffect(() => {
-    localStorage.setItem("zenTags_v4", JSON.stringify(availableTags));
-  }, [availableTags]);
+    if (user) localStorage.setItem("zenTags_v5", JSON.stringify(availableTags));
+  }, [availableTags, user]);
+  useEffect(() => {
+    if (user) localStorage.setItem("zenTheme", theme);
+  }, [theme, user]);
+  useEffect(() => {
+    if (user) localStorage.setItem("zenDark", String(darkMode));
+  }, [darkMode, user]);
+  useEffect(() => {
+    if (user) localStorage.setItem("zenVolumes", JSON.stringify(volumes));
+  }, [volumes, user]);
+  useEffect(() => {
+    if (user) localStorage.setItem("zenWorkDur", String(workDuration));
+  }, [workDuration, user]);
+  useEffect(() => {
+    if (user) localStorage.setItem("zenBreakDur", String(breakDuration));
+  }, [breakDuration, user]);
+
+  // --- LOGIC: TIMER ---
+  useEffect(() => {
+    let interval: any = null;
+    if (isTimerRunning && timerTime > 0) {
+      interval = setInterval(() => setTimerTime((t) => t - 1), 1000);
+    } else if (timerTime === 0 && isTimerRunning) {
+      // Timer Finished
+      setIsTimerRunning(false);
+      const audio = new Audio(ALARM_SOUND);
+      audio.volume = 0.5;
+      audio.play().catch(() => {});
+
+      // Switch Mode
+      if (timerMode === "focus") {
+        setTimerMode("break");
+        setTimerTime(breakDuration * 60);
+      } else {
+        setTimerMode("focus");
+        setTimerTime(workDuration * 60);
+      }
+    }
+    return () => clearInterval(interval);
+  }, [isTimerRunning, timerTime, timerMode, workDuration, breakDuration]);
 
   // --- LOGIC: DATE & TIME HELPERS ---
   const isSameDay = (d1: Date, d2: Date) => {
@@ -303,7 +431,7 @@ export default function App() {
     );
   };
 
-  // --- LOGIC: ADD TASK (Smart Parsing) ---
+  // --- LOGIC: ADD TASK ---
   const handleAddTask = (e: any) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
@@ -317,14 +445,12 @@ export default function App() {
 
     const lower = text.toLowerCase();
 
-    // 1. Time Parsing (e.g., "at 5pm", "at 14:00")
     const timeMatch = lower.match(/\bat\s+(\d{1,2}(:\d{2})?(am|pm)?)/i);
     if (timeMatch) {
       time = timeMatch[1];
-      text = text.replace(timeMatch[0], ""); // Remove time string from text
+      text = text.replace(timeMatch[0], "");
     }
 
-    // 2. Date Parsing
     if (lower.includes(" tom ")) {
       date.setDate(date.getDate() + 1);
       text = text.replace(/ tom /gi, " ");
@@ -348,7 +474,6 @@ export default function App() {
       }
     });
 
-    // 3. Flags Parsing
     if (lower.includes("!urgent")) {
       priority = "urgent";
       tag = "Urgent";
@@ -367,7 +492,6 @@ export default function App() {
       text = text.replace(/!rec/gi, "");
     }
 
-    // Clean up extra spaces
     text = text.replace(/\s+/g, " ").trim();
 
     setTasks([
@@ -386,17 +510,6 @@ export default function App() {
     setInputValue("");
   };
 
-  // --- LOGIC: TIMER ---
-  useEffect(() => {
-    let interval: any = null;
-    if (isTimerRunning && timerTime > 0) {
-      interval = setInterval(() => setTimerTime((t) => t - 1), 1000);
-    } else {
-      clearInterval(interval);
-    }
-    return () => clearInterval(interval);
-  }, [isTimerRunning, timerTime]);
-
   const activeTheme = THEMES[theme];
   const formatTime = (s: number) =>
     `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
@@ -413,6 +526,64 @@ export default function App() {
     downloadAnchorNode.remove();
   };
 
+  // --- AUTH HANDLER ---
+  const handleLogin = () => {
+    if (!loginName || loginPin.length !== 4) {
+      setLoginError("Enter name & 4-digit PIN");
+      return;
+    }
+    const savedUser = JSON.parse(localStorage.getItem("zenUser") || "null");
+    if (
+      !savedUser ||
+      (savedUser.name === loginName && savedUser.pin === loginPin)
+    ) {
+      const newUser = { name: loginName, pin: loginPin };
+      localStorage.setItem("zenUser", JSON.stringify(newUser));
+      setUser(newUser);
+    } else {
+      setLoginError("Incorrect Profile");
+    }
+  };
+
+  if (!user) {
+    return (
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans">
+        <div className="bg-white p-8 rounded-3xl shadow-xl w-full max-w-sm text-center">
+          <div className="mb-6 flex justify-center text-violet-500">
+            <Icon name="lock" size={48} />
+          </div>
+          <h1 className="text-2xl font-bold mb-2">ZenStation</h1>
+          <p className="text-gray-400 text-sm mb-6">
+            Enter your Name & 4-Digit PIN to sync.
+          </p>
+          <input
+            placeholder="Your Name"
+            className="w-full p-3 bg-gray-100 rounded-xl mb-3 outline-none focus:ring-2 focus:ring-violet-200"
+            value={loginName}
+            onChange={(e) => setLoginName(e.target.value)}
+          />
+          <input
+            placeholder="4-Digit PIN"
+            type="password"
+            maxLength={4}
+            className="w-full p-3 bg-gray-100 rounded-xl mb-4 outline-none focus:ring-2 focus:ring-violet-200 text-center tracking-widest font-bold"
+            value={loginPin}
+            onChange={(e) => setLoginPin(e.target.value)}
+          />
+          {loginError && (
+            <p className="text-red-500 text-xs mb-4">{loginError}</p>
+          )}
+          <button
+            onClick={handleLogin}
+            className="w-full py-3 bg-violet-600 text-white rounded-xl font-bold hover:bg-violet-700 transition-all"
+          >
+            Enter Zen Mode
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className={`${darkMode ? "dark" : ""} font-sans relative`}>
       <AudioPlayer isPlaying={isTimerRunning} volumes={volumes} />
@@ -425,8 +596,6 @@ export default function App() {
               <h1 className="text-xl font-bold tracking-tight">
                 Zen<span className={activeTheme.main}>Station</span>
               </h1>
-
-              {/* Color Picker */}
               <div className="hidden sm:flex gap-2 ml-4 px-3 py-1 bg-gray-100 dark:bg-slate-800 rounded-full">
                 {Object.keys(THEMES).map((k) => (
                   <button
@@ -443,28 +612,44 @@ export default function App() {
             </div>
 
             <div className="flex items-center gap-4 relative">
-              {/* Sound Mixer Toggle */}
+              {/* Sound Mixer */}
               <button
                 onClick={() => setShowSoundMixer(!showSoundMixer)}
                 className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 ${
                   showSoundMixer ? activeTheme.main : ""
                 }`}
               >
-                <Icon name="sliders" />
+                <Icon name="headphones" />
               </button>
 
-              {/* Sound Mixer Popup */}
               {showSoundMixer && (
-                <div className="absolute top-12 right-0 w-64 bg-white dark:bg-slate-800 p-4 rounded-xl shadow-xl border border-gray-100 dark:border-slate-700 z-50">
-                  <h4 className="font-bold text-sm mb-3 flex items-center gap-2">
-                    <Icon name="music" size={14} /> Soundscapes
+                <div className="absolute top-12 right-0 w-72 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 z-50">
+                  <h4 className="font-bold text-sm mb-4 flex items-center gap-2 text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                    Soundscapes
                   </h4>
-                  <div className="space-y-3">
+                  <div className="space-y-4">
                     {Object.keys(volumes).map((k) => (
-                      <div key={k} className="flex items-center gap-2">
-                        <span className="text-xs uppercase w-12 font-bold opacity-60">
-                          {k}
-                        </span>
+                      <div key={k} className="flex items-center gap-3">
+                        <div
+                          className={`p-2 rounded-lg ${
+                            volumes[k] > 0
+                              ? activeTheme.light + " " + activeTheme.main
+                              : "bg-gray-100 dark:bg-slate-700 text-gray-400"
+                          }`}
+                        >
+                          <Icon
+                            name={
+                              k === "lofi"
+                                ? "music"
+                                : k === "rain"
+                                ? "cloud"
+                                : k === "forest"
+                                ? "tree"
+                                : "water"
+                            }
+                            size={16}
+                          />
+                        </div>
                         <input
                           type="range"
                           min="0"
@@ -477,7 +662,7 @@ export default function App() {
                               [k]: parseFloat(e.target.value),
                             })
                           }
-                          className="flex-1 h-1 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
+                          className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
                         />
                       </div>
                     ))}
@@ -485,8 +670,11 @@ export default function App() {
                 </div>
               )}
 
-              {/* Timer */}
+              {/* Timer Display */}
               <div className="flex items-center gap-3 bg-gray-100 dark:bg-slate-800 px-3 py-1.5 rounded-full">
+                {timerMode === "break" && (
+                  <Icon name="coffee" size={14} className="text-orange-400" />
+                )}
                 <span className="font-mono text-sm font-bold w-10 text-center">
                   {formatTime(timerTime)}
                 </span>
@@ -498,15 +686,12 @@ export default function App() {
                 </button>
               </div>
 
-              {/* Settings Toggle */}
               <button
                 onClick={() => setShowSettings(true)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full"
               >
                 <Icon name="sliders" size={18} />
               </button>
-
-              {/* Dark Mode */}
               <button
                 onClick={() => setDarkMode(!darkMode)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full"
@@ -518,8 +703,21 @@ export default function App() {
         </div>
 
         <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col lg:flex-row gap-8">
-          {/* --- SIDEBAR --- */}
+          {/* SIDEBAR */}
           <div className="w-full lg:w-64 space-y-6">
+            <div className="flex items-center gap-3 p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
+              <div
+                className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${activeTheme.bg}`}
+              >
+                {user.name[0]}
+              </div>
+              <div>
+                <p className="text-xs text-gray-400 font-bold uppercase">
+                  Welcome Back
+                </p>
+                <p className="font-bold">{user.name}</p>
+              </div>
+            </div>
             <div className="flex flex-col gap-1">
               {["list", "3day", "month"].map((v: any) => (
                 <button
@@ -540,7 +738,7 @@ export default function App() {
                         : "calendar"
                     }
                     className={view === v ? activeTheme.main : "text-gray-400"}
-                  />
+                  />{" "}
                   {v === "list"
                     ? "My List"
                     : v === "3day"
@@ -549,8 +747,6 @@ export default function App() {
                 </button>
               ))}
             </div>
-
-            {/* Habits */}
             <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="font-bold text-sm flex items-center gap-2">
@@ -615,9 +811,8 @@ export default function App() {
             </div>
           </div>
 
-          {/* --- MAIN AREA --- */}
+          {/* MAIN AREA */}
           <div className="flex-1">
-            {/* Input */}
             <form onSubmit={handleAddTask} className="mb-6 relative group">
               <div className="relative">
                 <input
@@ -647,7 +842,6 @@ export default function App() {
               </div>
             </form>
 
-            {/* LIST VIEW */}
             {view === "list" && (
               <div className="space-y-2">
                 {tasks.length === 0 && (
@@ -733,7 +927,6 @@ export default function App() {
               </div>
             )}
 
-            {/* 3-DAY & MONTH VIEWS (reused structure) */}
             {(view === "3day" || view === "month") && (
               <div
                 className={`grid ${
@@ -762,10 +955,8 @@ export default function App() {
                       offset
                     );
                   else date.setDate(date.getDate() + offset);
-
                   const dayTasks = tasks.filter((t) => isSameDay(t.date, date));
                   const isToday = isSameDay(date, new Date());
-
                   return (
                     <div
                       key={offset}
@@ -818,6 +1009,37 @@ export default function App() {
               </div>
 
               <div className="mb-6">
+                <h4 className="font-bold text-sm mb-3 opacity-60 uppercase flex items-center gap-2">
+                  <Icon name="clock" size={14} /> Timer Durations (Mins)
+                </h4>
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <label className="text-xs mb-1 block">Focus</label>
+                    <input
+                      type="number"
+                      value={workDuration}
+                      onChange={(e) => {
+                        setWorkDuration(parseInt(e.target.value));
+                        setTimerTime(parseInt(e.target.value) * 60);
+                      }}
+                      className="w-full bg-gray-100 dark:bg-slate-800 p-2 rounded-lg"
+                    />
+                  </div>
+                  <div className="flex-1">
+                    <label className="text-xs mb-1 block">Break</label>
+                    <input
+                      type="number"
+                      value={breakDuration}
+                      onChange={(e) =>
+                        setBreakDuration(parseInt(e.target.value))
+                      }
+                      className="w-full bg-gray-100 dark:bg-slate-800 p-2 rounded-lg"
+                    />
+                  </div>
+                </div>
+              </div>
+
+              <div className="mb-6">
                 <h4 className="font-bold text-sm mb-2 opacity-60 uppercase">
                   Manage Tags
                 </h4>
@@ -864,19 +1086,21 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="pt-6 border-t dark:border-slate-800">
-                <h4 className="font-bold text-sm mb-2 opacity-60 uppercase">
-                  Data
-                </h4>
-                <p className="text-xs text-gray-500 mb-4">
-                  Your tasks are saved automatically to this browser. To move
-                  them to another computer, download a backup.
-                </p>
+              <div className="pt-6 border-t dark:border-slate-800 flex justify-between items-center">
+                <button
+                  onClick={() => {
+                    localStorage.clear();
+                    window.location.reload();
+                  }}
+                  className="text-xs text-red-400 hover:text-red-600"
+                >
+                  Log Out / Reset
+                </button>
                 <button
                   onClick={downloadData}
                   className="flex items-center gap-2 text-sm font-bold text-gray-600 hover:text-gray-900 dark:text-gray-300"
                 >
-                  <Icon name="download" /> Download Backup JSON
+                  <Icon name="download" /> Backup Data
                 </button>
               </div>
             </div>
@@ -887,25 +1111,21 @@ export default function App() {
         {showHelp && (
           <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center p-4">
             <div className="bg-white dark:bg-slate-900 w-full max-w-lg rounded-2xl p-8 shadow-2xl">
-              <h2 className="text-2xl font-bold mb-4">How to be Zen 🧘</h2>
+              <h2 className="text-2xl font-bold mb-4">Zen Guide 🧘</h2>
               <ul className="space-y-3 text-sm text-gray-600 dark:text-gray-300 mb-6 list-disc pl-5">
                 <li>
-                  <b>Smart Typing:</b> Type "Math HW tom" to set date to
-                  tomorrow. The word "tom" disappears!
+                  <b>Profile:</b> Data saves to your Name/PIN.
                 </li>
                 <li>
-                  <b>Times:</b> Type "at 5pm" or "at 14:00" to set a time.
+                  <b>Smart Typing:</b> "Math HW tom at 5pm !urgent" auto-sets
+                  everything.
                 </li>
                 <li>
-                  <b>Urgency:</b> Type "!urgent" to flag a task red.
+                  <b>Timer:</b> Click Settings to change Focus (25m) and Break
+                  (5m) durations.
                 </li>
                 <li>
-                  <b>Soundscapes:</b> Click the sliders icon (top right) to mix
-                  Rain, Forest, and Waves with your music.
-                </li>
-                <li>
-                  <b>Drag & Drop:</b> Open "3-Day Plan" or "Month" to drag tasks
-                  to new dates.
+                  <b>Soundscapes:</b> Click 🎧 to mix Rain/Forest sounds.
                 </li>
               </ul>
               <button
@@ -918,7 +1138,6 @@ export default function App() {
           </div>
         )}
 
-        {/* HELP FAB */}
         <button
           onClick={() => setShowHelp(true)}
           className={`fixed bottom-6 right-6 p-4 rounded-full shadow-lg text-white hover:scale-105 transition-transform ${activeTheme.bg}`}
