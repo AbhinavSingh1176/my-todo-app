@@ -1,5 +1,6 @@
 {
   "name": "zen-station",
+  "homepage": "https://abhinavsingh1176.github.io/my-todo-app",
   "version": "1.0.0",
   "description": "Student Productivity Dashboard",
   "main": "src/index.tsx",
