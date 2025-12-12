@@ -162,6 +162,7 @@ const THEMES: any = {
     border: "border-violet-200",
     light: "bg-violet-50",
     Hz: "bg-violet-100",
+    HK: "hover:bg-violet-600",
     ring: "focus:border-violet-500",
   },
   blue: {
@@ -170,6 +171,7 @@ const THEMES: any = {
     border: "border-blue-200",
     light: "bg-blue-50",
     Hz: "bg-blue-100",
+    HK: "hover:bg-blue-600",
     ring: "focus:border-blue-500",
   },
   rose: {
@@ -178,6 +180,7 @@ const THEMES: any = {
     border: "border-rose-200",
     light: "bg-rose-50",
     Hz: "bg-rose-100",
+    HK: "hover:bg-rose-600",
     ring: "focus:border-rose-500",
   },
   emerald: {
@@ -186,6 +189,7 @@ const THEMES: any = {
     border: "border-emerald-200",
     light: "bg-emerald-50",
     Hz: "bg-emerald-100",
+    HK: "hover:bg-emerald-600",
     ring: "focus:border-emerald-500",
   },
 };
@@ -264,7 +268,56 @@ export default function App() {
   const bufferCacheRef = useRef<Record<string, AudioBuffer | null>>({});
   const convolverIRRef = useRef<AudioBuffer | null>(null);
 
-  // ------------------- WebAudio Helpers & Generators --------------------
+  /* ---------------- WebAudio helpers ---------------- */
+  const createSaturationNode = (ctx: BaseAudioContext, drive = 1.2) => {
+    const ws = ctx.createWaveShaper();
+    const samples = 4096;
+    const curve = new Float32Array(samples);
+    const k = drive;
+    const deg = Math.PI / 180;
+    for (let i = 0; i < samples; ++i) {
+      const x = (i * 2) / samples - 1;
+      curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+    }
+    ws.curve = curve;
+    ws.oversample = "4x";
+    return ws;
+  };
+
+  const createStereoDelay = (
+    ctx: BaseAudioContext,
+    timeMs = 28,
+    feedback = 0.12,
+    mix = 0.12
+  ) => {
+    const leftDelay = ctx.createDelay();
+    const rightDelay = ctx.createDelay();
+    leftDelay.delayTime.value = (timeMs / 1000) * (0.95 + Math.random() * 0.05);
+    rightDelay.delayTime.value =
+      (timeMs / 1000) * (1.05 + Math.random() * 0.05);
+    const leftFb = ctx.createGain();
+    leftFb.gain.value = feedback;
+    const rightFb = ctx.createGain();
+    rightFb.gain.value = feedback;
+    const wet = ctx.createGain();
+    wet.gain.value = mix;
+
+    return {
+      connect: (input: AudioNode, output: AudioNode) => {
+        input.connect(leftDelay);
+        input.connect(rightDelay);
+        leftDelay.connect(leftFb);
+        leftFb.connect(leftDelay);
+        rightDelay.connect(rightFb);
+        rightFb.connect(rightDelay);
+        leftDelay.connect(wet);
+        rightDelay.connect(wet);
+        wet.connect(output);
+      },
+    };
+  };
+
+  // Procedural generators
   const createStereoBuffer = (
     ctx: BaseAudioContext,
     seconds: number,
@@ -316,7 +369,7 @@ export default function App() {
     return curve;
   };
 
-  // Procedural/simple generators
+  // Generators (brown, rain, waves, thunder, forest)
   const generateBrownBuffer = (ctx: BaseAudioContext, seconds = 14) =>
     createStereoBuffer(ctx, seconds, (L, R, sr) => {
       let lastL = 0,
@@ -440,9 +493,8 @@ export default function App() {
       }
     });
 
-  const generateLofiBuffer = (ctx: BaseAudioContext, seconds = 60) =>
+  const generateLofiBuffer = (ctx: BaseAudioContext, seconds = 90) =>
     createStereoBuffer(ctx, seconds, (L, R, sr) => {
-      // Chords
       const chords = [
         [220, 277.18, 329.63],
         [196, 246.94, 329.63],
@@ -471,7 +523,6 @@ export default function App() {
           R[i] += pad * env * (0.9 + 0.1 * Math.sin(t * 0.11));
         }
       }
-      // Beat
       const bpm = 70;
       const beatInterval = 60 / bpm;
       for (let t = 0; t < seconds; t += beatInterval) {
@@ -494,7 +545,6 @@ export default function App() {
           R[hatPos + i] += noise * 0.6;
         }
       }
-      // Vinyl Crackle
       const crackles = Math.floor(seconds * 3);
       for (let c = 0; c < crackles; c++) {
         const pos = Math.floor(Math.random() * L.length);
@@ -506,7 +556,6 @@ export default function App() {
           R[pos + i] += n * (0.6 + Math.random() * 0.6);
         }
       }
-      // Normalize
       let max = 0.001;
       for (let i = 0; i < L.length; i++)
         max = Math.max(max, Math.abs(L[i]), Math.abs(R[i]));
@@ -517,7 +566,7 @@ export default function App() {
       }
     });
 
-  // ---------------- AudioContext + master chain init --------------------
+  /* -------------- AudioContext + master chain init ------------------ */
   useEffect(() => {
     const AudioCtor =
       (window as any).AudioContext || (window as any).webkitAudioContext;
@@ -525,7 +574,6 @@ export default function App() {
     const ctx = new AudioCtor();
     audioCtxRef.current = ctx;
 
-    // master nodes
     const masterIn = ctx.createGain();
     const hp = ctx.createBiquadFilter();
     hp.type = "highpass";
@@ -541,9 +589,9 @@ export default function App() {
       /* ignore */
     }
     const comp = ctx.createDynamicsCompressor();
-    comp.threshold.value = -24;
+    comp.threshold.value = -18;
     comp.knee.value = 6;
-    comp.ratio.value = 3.5;
+    comp.ratio.value = 2.5;
     comp.attack.value = 0.01;
     comp.release.value = 0.25;
     const limiter = ctx.createWaveShaper();
@@ -570,7 +618,6 @@ export default function App() {
       masterGain,
     };
 
-    // per-channel gains
     ["lofi", "rain", "thunder", "waves", "brown", "forest"].forEach((k) => {
       const g = ctx.createGain();
       g.gain.value = 0;
@@ -593,7 +640,6 @@ export default function App() {
     };
   }, []);
 
-  // Resume context helper
   const resumeAudioContext = async () => {
     try {
       const ctx = audioCtxRef.current;
@@ -601,7 +647,7 @@ export default function App() {
     } catch (e) {}
   };
 
-  // Start/stop channels & ramp gains when volumes change ------------------
+  /* ----------------- Start/stop channels & ramp gains ----------------- */
   useEffect(() => {
     const ctx = audioCtxRef.current;
     if (!ctx) return;
@@ -629,7 +675,7 @@ export default function App() {
             buf = generateForestBuffer(ctx, 14 + Math.random() * 6);
             break;
           case "lofi":
-            buf = generateLofiBuffer(ctx, 60);
+            buf = generateLofiBuffer(ctx, 90);
             break;
           default:
             buf = generateBrownBuffer(ctx, 12);
@@ -641,7 +687,6 @@ export default function App() {
       src.buffer = buf!;
       src.loop = true;
 
-      // gentle per-channel shaping
       let nodeOut: AudioNode = src;
       if (key === "brown") {
         const lp = ctx.createBiquadFilter();
@@ -671,9 +716,25 @@ export default function App() {
       }
 
       const panner = ctx.createStereoPanner();
-      panner.pan.value = (Math.random() - 0.5) * 0.6;
-      nodeOut.connect(panner);
-      panner.connect(channelGainsRef.current[key]);
+      panner.pan.value = (Math.random() - 0.5) * 0.4;
+
+      if (key === "lofi") {
+        // chain: src -> sat -> stereoDelay -> panner -> channelGain
+        const sat = createSaturationNode(ctx, 1.12);
+        const stereoDelay = createStereoDelay(ctx, 28, 0.12, 0.1);
+        src.connect(sat);
+
+        // Connect Dry signal
+        sat.connect(panner);
+
+        // Connect Wet signal (echoes)
+        stereoDelay.connect(sat, panner);
+
+        panner.connect(channelGainsRef.current[key]);
+      } else {
+        nodeOut.connect(panner);
+        panner.connect(channelGainsRef.current[key]);
+      }
 
       try {
         src.start();
@@ -711,7 +772,6 @@ export default function App() {
         }, 300);
     });
 
-    // master gain
     try {
       const mg = masterNodesRef.current.masterGain;
       mg.gain.cancelScheduledValues(0);
@@ -723,7 +783,7 @@ export default function App() {
     } catch (e) {}
   }, [volumes]);
 
-  // ------------------ Rest of App UI logic ------------------
+  /* ------------------ Rest of App logic / UI (unchanged) -------------- */
   useEffect(() => {
     if (user) localStorage.setItem("zenTasks_v6", JSON.stringify(tasks));
   }, [tasks, user]);
