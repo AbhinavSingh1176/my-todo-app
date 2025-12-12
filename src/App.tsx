@@ -154,6 +154,8 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
 // --- CONFIG ---
 const ALARM_SOUND =
   "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3";
+const LOFI_URL =
+  "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3";
 
 const THEMES: any = {
   violet: {
@@ -162,7 +164,6 @@ const THEMES: any = {
     border: "border-violet-200",
     light: "bg-violet-50",
     Hz: "bg-violet-100",
-    HK: "hover:bg-violet-600",
     ring: "focus:border-violet-500",
   },
   blue: {
@@ -171,7 +172,6 @@ const THEMES: any = {
     border: "border-blue-200",
     light: "bg-blue-50",
     Hz: "bg-blue-100",
-    HK: "hover:bg-blue-600",
     ring: "focus:border-blue-500",
   },
   rose: {
@@ -180,7 +180,6 @@ const THEMES: any = {
     border: "border-rose-200",
     light: "bg-rose-50",
     Hz: "bg-rose-100",
-    HK: "hover:bg-rose-600",
     ring: "focus:border-rose-500",
   },
   emerald: {
@@ -189,13 +188,11 @@ const THEMES: any = {
     border: "border-emerald-200",
     light: "bg-emerald-50",
     Hz: "bg-emerald-100",
-    HK: "hover:bg-emerald-600",
     ring: "focus:border-emerald-500",
   },
 };
 
 export default function App() {
-  // --- STATE ---
   const [user, setUser] = useState<any>(() =>
     JSON.parse(localStorage.getItem("zenUser") || "null")
   );
@@ -493,8 +490,10 @@ export default function App() {
       }
     });
 
-  const generateLofiBuffer = (ctx: BaseAudioContext, seconds = 90) =>
+  // Fallback Procedural Lofi (if remote fetch fails)
+  const generateLofiBuffer = (ctx: BaseAudioContext, seconds = 60) =>
     createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      // Chords
       const chords = [
         [220, 277.18, 329.63],
         [196, 246.94, 329.63],
@@ -523,6 +522,7 @@ export default function App() {
           R[i] += pad * env * (0.9 + 0.1 * Math.sin(t * 0.11));
         }
       }
+      // Beat
       const bpm = 70;
       const beatInterval = 60 / bpm;
       for (let t = 0; t < seconds; t += beatInterval) {
@@ -545,6 +545,7 @@ export default function App() {
           R[hatPos + i] += noise * 0.6;
         }
       }
+      // Vinyl Crackle
       const crackles = Math.floor(seconds * 3);
       for (let c = 0; c < crackles; c++) {
         const pos = Math.floor(Math.random() * L.length);
@@ -565,6 +566,22 @@ export default function App() {
         R[i] *= norm;
       }
     });
+
+  // Helper to fetch remote audio
+  const loadRemoteLoop = async (
+    ctx: BaseAudioContext,
+    url: string,
+    cache: Record<string, AudioBuffer | null>,
+    key: string
+  ) => {
+    if (cache[key]) return cache[key];
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error("Fetch failed");
+    const arrayBuffer = await resp.arrayBuffer();
+    const audioBuffer = await ctx.decodeAudioData(arrayBuffer);
+    cache[key] = audioBuffer;
+    return audioBuffer;
+  };
 
   /* -------------- AudioContext + master chain init ------------------ */
   useEffect(() => {
@@ -658,36 +675,52 @@ export default function App() {
 
       let buf = bufferCacheRef.current[key];
       if (!buf) {
-        switch (key) {
-          case "rain":
-            buf = generateRainBuffer(ctx, 12 + Math.random() * 8);
-            break;
-          case "thunder":
-            buf = generateThunderBuffer(ctx, 14 + Math.random() * 10);
-            break;
-          case "waves":
-            buf = generateWavesBuffer(ctx, 12 + Math.random() * 8);
-            break;
-          case "brown":
-            buf = generateBrownBuffer(ctx, 12 + Math.random() * 6);
-            break;
-          case "forest":
-            buf = generateForestBuffer(ctx, 14 + Math.random() * 6);
-            break;
-          case "lofi":
+        if (key === "lofi") {
+          try {
+            buf = await loadRemoteLoop(
+              ctx,
+              LOFI_URL,
+              bufferCacheRef.current,
+              "lofi_remote"
+            );
+          } catch (e) {
+            console.warn("Remote loop failed, falling back to procedural", e);
             buf = generateLofiBuffer(ctx, 90);
-            break;
-          default:
-            buf = generateBrownBuffer(ctx, 12);
+          }
+        } else {
+          switch (key) {
+            case "rain":
+              buf = generateRainBuffer(ctx, 12 + Math.random() * 8);
+              break;
+            case "thunder":
+              buf = generateThunderBuffer(ctx, 14 + Math.random() * 10);
+              break;
+            case "waves":
+              buf = generateWavesBuffer(ctx, 12 + Math.random() * 8);
+              break;
+            case "brown":
+              buf = generateBrownBuffer(ctx, 12 + Math.random() * 6);
+              break;
+            case "forest":
+              buf = generateForestBuffer(ctx, 14 + Math.random() * 6);
+              break;
+            default:
+              buf = generateBrownBuffer(ctx, 12);
+          }
         }
         bufferCacheRef.current[key] = buf;
       }
 
+      // If buffer is still null (shouldn't happen), abort
+      if (!buf) return;
+
       const src = ctx.createBufferSource();
-      src.buffer = buf!;
+      src.buffer = buf;
       src.loop = true;
 
+      // Apply effects chain
       let nodeOut: AudioNode = src;
+
       if (key === "brown") {
         const lp = ctx.createBiquadFilter();
         lp.type = "lowpass";
@@ -719,15 +752,17 @@ export default function App() {
       panner.pan.value = (Math.random() - 0.5) * 0.4;
 
       if (key === "lofi") {
-        // chain: src -> sat -> stereoDelay -> panner -> channelGain
+        // Lofi chain: src -> saturation -> (split to dry & wet) -> panner
         const sat = createSaturationNode(ctx, 1.12);
         const stereoDelay = createStereoDelay(ctx, 28, 0.12, 0.1);
+
         src.connect(sat);
 
-        // Connect Dry signal
+        // 1. Dry signal
         sat.connect(panner);
 
-        // Connect Wet signal (echoes)
+        // 2. Wet signal (delay)
+        // stereoDelay.connect() attaches input to delays, and output to destination
         stereoDelay.connect(sat, panner);
 
         panner.connect(channelGainsRef.current[key]);
@@ -753,9 +788,11 @@ export default function App() {
     };
 
     Object.keys(channelGainsRef.current).forEach((key) => {
-      const desired = volumes[key] || 0;
+      // Determine desired volume: must be > 0 AND timer must be running
+      const desired = isTimerRunning && volumes[key] > 0 ? volumes[key] : 0;
       const g = channelGainsRef.current[key];
       if (!g) return;
+
       try {
         g.gain.cancelScheduledValues(0);
         g.gain.setValueAtTime(g.gain.value, ctx.currentTime);
@@ -764,14 +801,19 @@ export default function App() {
         g.gain.value = desired;
       }
 
-      if (desired > 0.001) startChannel(key).catch(() => {});
-      else
+      if (desired > 0.001) {
+        startChannel(key).catch(() => {});
+      } else {
+        // If desired is 0, we schedule a check to stop the channel
+        // This allows the fade-out to complete before stopping
         setTimeout(() => {
           if ((channelGainsRef.current[key]?.gain.value || 0) < 0.001)
             stopChannel(key);
         }, 300);
+      }
     });
 
+    // master gain
     try {
       const mg = masterNodesRef.current.masterGain;
       mg.gain.cancelScheduledValues(0);
@@ -781,7 +823,7 @@ export default function App() {
         ctx.currentTime + 0.25
       );
     } catch (e) {}
-  }, [volumes]);
+  }, [volumes, isTimerRunning]);
 
   /* ------------------ Rest of App logic / UI (unchanged) -------------- */
   useEffect(() => {
