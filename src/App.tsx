@@ -591,7 +591,6 @@ export default function App() {
       } catch (e) {}
       audioCtxRef.current = null;
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Resume context helper
