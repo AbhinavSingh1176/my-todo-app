@@ -10,42 +10,54 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
       <path d="M3 6h18M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2" />
     ),
     calendar: (
-      <>
+      <g>
         <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
         <line x1="16" y1="2" x2="16" y2="6" />
         <line x1="8" y1="2" x2="8" y2="6" />
         <line x1="3" y1="10" x2="21" y2="10" />
-      </>
+      </g>
     ),
     list: (
-      <>
+      <g>
         <line x1="8" y1="6" x2="21" y2="6" />
         <line x1="8" y1="12" x2="21" y2="12" />
         <line x1="8" y1="18" x2="21" y2="18" />
         <line x1="3" y1="6" x2="3.01" y2="6" />
         <line x1="3" y1="12" x2="3.01" y2="12" />
         <line x1="3" y1="18" x2="3.01" y2="18" />
-      </>
+      </g>
     ),
     columns: (
-      <>
+      <g>
         <rect x="3" y="3" width="18" height="18" rx="2" ry="2" />
         <line x1="9" y1="3" x2="9" y2="21" />
-      </>
+      </g>
     ),
     sun: (
-      <>
+      <g>
         <circle cx="12" cy="12" r="5" />
         <path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" />
-      </>
+      </g>
     ),
     moon: <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />,
+    left: <polyline points="15 18 9 12 15 6" />,
+    right: <polyline points="9 18 15 12 9 6" />,
     play: <polygon points="5 3 19 12 5 21 5 3" />,
     pause: (
-      <>
+      <g>
         <rect x="6" y="4" width="4" height="16" />
         <rect x="14" y="4" width="4" height="16" />
-      </>
+      </g>
+    ),
+    grip: (
+      <g>
+        <circle cx="9" cy="12" r="1" />
+        <circle cx="9" cy="5" r="1" />
+        <circle cx="9" cy="19" r="1" />
+        <circle cx="15" cy="12" r="1" />
+        <circle cx="15" cy="5" r="1" />
+        <circle cx="15" cy="19" r="1" />
+      </g>
     ),
     flame: (
       <path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.1.2-2.2.6-3.3.3.5.9 1.5 2.9 2.8z" />
@@ -54,15 +66,15 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14 M22 4L12 14.01l-3-3" />
     ),
     repeat: (
-      <>
+      <g>
         <path d="M17 1l4 4-4 4" />
         <path d="M3 11V9a4 4 0 0 1 4-4h14" />
         <path d="M7 23l-4-4 4-4" />
         <path d="M21 13v2a4 4 0 0 1-4 4H3" />
-      </>
+      </g>
     ),
     sliders: (
-      <>
+      <g>
         <line x1="4" y1="21" x2="4" y2="14" />
         <line x1="4" y1="10" x2="4" y2="3" />
         <line x1="12" y1="21" x2="12" y2="12" />
@@ -72,83 +84,94 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
         <line x1="1" y1="14" x2="7" y2="14" />
         <line x1="9" y1="8" x2="15" y2="8" />
         <line x1="17" y1="16" x2="23" y2="16" />
-      </>
+      </g>
     ),
     music: (
-      <>
+      <g>
         <path d="M9 18V5l12-2v13" />
         <circle cx="6" cy="18" r="3" />
         <circle cx="18" cy="16" r="3" />
-      </>
+      </g>
     ),
     help: (
-      <>
+      <g>
         <circle cx="12" cy="12" r="10" />
         <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
         <line x1="12" y1="17" x2="12.01" y2="17" />
-      </>
+      </g>
     ),
     x: (
-      <>
+      <g>
         <line x1="18" y1="6" x2="6" y2="18" />
         <line x1="6" y1="6" x2="18" y2="18" />
-      </>
+      </g>
     ),
     download: (
-      <>
+      <g>
         <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
         <polyline points="7 10 12 15 17 10" />
         <line x1="12" y1="15" x2="12" y2="3" />
-      </>
+      </g>
     ),
     headphones: (
-      <>
+      <g>
         <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
         <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-      </>
+      </g>
     ),
-    cloud: <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />,
-    cloudRain: (
-      <>
-        <line x1="16" y1="13" x2="16" y2="21" />
-        <line x1="8" y1="13" x2="8" y2="21" />
-        <line x1="12" y1="15" x2="12" y2="23" />
-        <path d="M20 16.58A5 5 0 0 0 18 7h-1.26A8 8 0 1 0 4 15.25" />
-      </>
+    cloud: (
+      <path d="M17.5 19c0-1.7-1.3-3-3-3h-1.1c-.2-2.3-2.1-4-4.4-4-1.8 0-3.3 1-4 2.5-2.2.3-3.7 2.4-3.4 4.6.3 1.9 2 3.3 3.9 3.3h12c1.7 0 3-1.3 3-3z" />
     ),
-    zap: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
-    wind: (
-      <>
-        <path d="M9.59 4.59A2 2 0 1 1 11 8H2m10.59 11.41A2 2 0 1 0 14 16H2m15.73-8.27A2.5 2.5 0 1 1 19.5 12H2" />
-      </>
+    tree: (
+      <g>
+        <path d="M12 10v10" />
+        <path d="M12 10l4-2" />
+        <path d="M12 10l-4-2" />
+        <path d="M12 20V10" />
+        <path d="M7 8l5-6 5 6" />
+        <path d="M6 14l6-6 6 6" />
+      </g>
     ),
-    waves: (
-      <>
-        <path d="M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5c2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
-        <path d="M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
-        <path d="M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2 2.6 0 2.4 2 5 2 2.5 0 2.5-2 5-2 1.3 0 1.9.5 2.5 1" />
-      </>
+    water: (
+      <g>
+        <path d="M2 12h20" />
+        <path d="M2 16h20" />
+        <path d="M2 8h20" />
+      </g>
+    ),
+    bolt: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
+    lock: (
+      <g>
+        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+      </g>
+    ),
+    user: (
+      <g>
+        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+        <circle cx="12" cy="7" r="4" />
+      </g>
+    ),
+    clock: (
+      <g>
+        <circle cx="12" cy="12" r="10" />
+        <polyline points="12 6 12 12 16 14" />
+      </g>
     ),
     coffee: (
-      <>
+      <g>
         <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
         <path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z" />
         <line x1="6" y1="1" x2="6" y2="4" />
         <line x1="10" y1="1" x2="10" y2="4" />
         <line x1="14" y1="1" x2="14" y2="4" />
-      </>
+      </g>
     ),
-    clock: (
-      <>
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </>
-    ),
-    lock: (
-      <>
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </>
+    noise: (
+      <g>
+        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+        <circle cx="12" cy="12" r="3" />
+      </g>
     ),
   };
   return (
@@ -164,177 +187,23 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
       strokeLinejoin="round"
       className={className}
     >
-      {icons[name]}
+      {icons[name] || icons.circle}
     </svg>
   );
 };
 
-// --- LOFI PLAYLIST (YouTube IDs) ---
-// Build a larger playlist by using many video IDs; the embed will loop through them.
-// If you want different tracks, replace/add video IDs to the array below.
-// Note: YouTube embed volume is not reliable across browsers; the lofi iframe is used for variety/looping only.
-const LOFI_VIDEO_IDS = [
-  "jfKfPfyJRdk", // lofi hip hop radio - beats to relax/study to (example)
-  "5qap5aO4i9A", // lofi study beats
-  "DWcJFNfaw9c",
-  "V1Pl8CzNzCw",
-  "bQ5n3CxG3w4",
-  "7NOSDKb0HlU",
-  "xGmJdS2Zkho",
-  "jywT8b2zc54",
-  "hHW1oY26kxQ",
-  "kU5cXx3TGcM",
-  // add more IDs as desired...
-];
-
-// --- HELPER: create smooth looped buffer ---
-// This fills a buffer and applies short fade at start/end to avoid clicks when looping.
-const createSmoothBuffer = (
-  audioContext: AudioContext,
-  lengthSeconds: number,
-  fillFn: (data: Float32Array, sampleRate: number) => void
-) => {
-  const sampleRate = audioContext.sampleRate;
-  const frameCount = Math.max(1, Math.floor(lengthSeconds * sampleRate));
-  const buffer = audioContext.createBuffer(1, frameCount, sampleRate);
-  const data = buffer.getChannelData(0);
-  fillFn(data, sampleRate);
-
-  // apply crossfade (fade-in/out) to avoid loop clicks
-  const fadeTime = Math.min(0.05, lengthSeconds * 0.02); // 50ms or 2% of buffer
-  const fadeFrames = Math.floor(fadeTime * sampleRate);
-  for (let i = 0; i < fadeFrames; i++) {
-    const fadeIn = i / fadeFrames;
-    const fadeOut = 1 - fadeIn;
-    data[i] *= fadeIn;
-    data[frameCount - 1 - i] *= fadeOut;
-  }
-  return buffer;
+// --- SOUND SOURCES ---
+const STREAMS: any = {
+  lofi: "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3",
+  rain: "https://assets.mixkit.co/active_storage/sfx/2496/2496-preview.mp3",
+  thunder: "https://assets.mixkit.co/active_storage/sfx/1136/1136-preview.mp3",
+  forest: "https://assets.mixkit.co/active_storage/sfx/243/243-preview.mp3",
+  waves: "https://assets.mixkit.co/active_storage/sfx/1126/1126-preview.mp3",
+  brown: "https://cdn.pixabay.com/audio/2021/08/09/audio_00832bb57a.mp3",
 };
 
-// --- AMBIENT SOUND GENERATORS (improved) ---
-const generateBrownNoiseBuffer = (
-  audioContext: AudioContext,
-  lengthSeconds = 12
-) => {
-  return createSmoothBuffer(audioContext, lengthSeconds, (data, sr) => {
-    let lastOut = 0;
-    for (let i = 0; i < data.length; i++) {
-      const white = Math.random() * 2 - 1;
-      lastOut = (lastOut + 0.02 * white) / 1.02;
-      data[i] = lastOut * 0.5; // scale down
-    }
-    // apply gentle lowpass in buffer domain by simple smoothing
-    for (let i = 2; i < data.length; i++) {
-      data[i] = (data[i] + data[i - 1] * 0.75 + data[i - 2] * 0.5) / 2.25;
-    }
-  });
-};
-
-const generateRainBuffer = (audioContext: AudioContext, lengthSeconds = 10) => {
-  return createSmoothBuffer(audioContext, lengthSeconds, (data, sr) => {
-    // Create many short random droplets with small decays
-    for (let i = 0; i < data.length; i++) data[i] = 0;
-    const dropletCount = Math.floor(lengthSeconds * 35); // avg droplets per second
-    for (let d = 0; d < dropletCount; d++) {
-      const pos = Math.floor(Math.random() * data.length);
-      const droplen = Math.floor(sr * (0.03 + Math.random() * 0.12)); // 30-150 ms
-      for (let j = 0; j < droplen && pos + j < data.length; j++) {
-        const env = Math.exp(-j / (sr * 0.03 + Math.random() * 0.06));
-        const noise = (Math.random() * 2 - 1) * 0.6 * env;
-        // high-frequency emphasis for rain droplets
-        data[pos + j] += noise * (0.6 + Math.random() * 0.8);
-      }
-    }
-    // mild smoothing so droplets sit naturally
-    for (let i = 1; i < data.length; i++)
-      data[i] = data[i] * 0.6 + data[i - 1] * 0.4;
-  });
-};
-
-const generateWavesBuffer = (
-  audioContext: AudioContext,
-  lengthSeconds = 16
-) => {
-  return createSmoothBuffer(audioContext, lengthSeconds, (data, sr) => {
-    // Low-frequency sine "swell" modulated with surf noise bursts
-    const baseFreq = 0.08 + Math.random() * 0.06; // 0.08 - 0.14Hz (swell)
-    let phase = Math.random() * Math.PI * 2;
-    for (let i = 0; i < data.length; i++) {
-      const t = i / sr;
-      // swell envelope between 0.6 - 1.0
-      const swell =
-        0.6 + 0.4 * (0.5 + 0.5 * Math.sin(2 * Math.PI * baseFreq * t + phase));
-      // surf high-frequency noise, amplitude follows swell
-      const surf = (Math.random() * 2 - 1) * 0.25 * swell;
-      // low rumble component
-      const rumble =
-        Math.sin(2 * Math.PI * 80 * t) * 0.02 * swell +
-        Math.sin(2 * Math.PI * 40 * t) * 0.01;
-      data[i] = surf + rumble;
-    }
-    // light smoothing
-    for (let i = 2; i < data.length; i++)
-      data[i] = (data[i] + data[i - 1] * 0.6 + data[i - 2] * 0.3) / 1.9;
-  });
-};
-
-const generateThunderBuffer = (
-  audioContext: AudioContext,
-  lengthSeconds = 20
-) => {
-  return createSmoothBuffer(audioContext, lengthSeconds, (data, sr) => {
-    for (let i = 0; i < data.length; i++) data[i] = 0;
-    // place 1-3 thunder events randomly
-    const events = 1 + Math.floor(Math.random() * 3);
-    for (let e = 0; e < events; e++) {
-      const start = Math.floor(Math.random() * (data.length * 0.8));
-      const dur = Math.floor(sr * (1.0 + Math.random() * 2.5)); // 1-3.5s
-      for (let i = 0; i < dur && start + i < data.length; i++) {
-        const env = Math.exp(-i / (sr * (0.6 + Math.random() * 1.5)));
-        // low-frequency rumble with some noisy highs
-        const r = (Math.random() * 2 - 1) * 0.8 * env;
-        const high =
-          (Math.random() * 2 - 1) * 0.15 * Math.exp(-i / (sr * 0.02));
-        data[start + i] += r * 0.8 + high;
-      }
-    }
-    // smooth overall
-    for (let i = 2; i < data.length; i++)
-      data[i] = (data[i] + 0.6 * data[i - 1] + 0.3 * data[i - 2]) / 1.9;
-  });
-};
-
-const generateForestBuffer = (
-  audioContext: AudioContext,
-  lengthSeconds = 16
-) => {
-  return createSmoothBuffer(audioContext, lengthSeconds, (data, sr) => {
-    // base gentle filtered noise (wind in leaves)
-    for (let i = 0; i < data.length; i++) {
-      const white = (Math.random() * 2 - 1) * 0.25;
-      // lowpass-ish by averaging neighbors later
-      data[i] = white;
-    }
-    // bird chirps: small harmonic sweeps placed randomly
-    const chirps = Math.floor(lengthSeconds * 1.8); // ~1-2 chirps per sec
-    for (let c = 0; c < chirps; c++) {
-      const pos = Math.floor(Math.random() * data.length);
-      const chirpLen = Math.floor(sr * (0.05 + Math.random() * 0.25)); // 50-300ms
-      const startFreq = 800 + Math.random() * 1500;
-      const endFreq = startFreq + (Math.random() * 1000 - 300);
-      for (let i = 0; i < chirpLen && pos + i < data.length; i++) {
-        const tt = i / chirpLen;
-        const freq = startFreq + (endFreq - startFreq) * tt;
-        const env = Math.sin(Math.PI * tt) * Math.exp(-tt * 2);
-        data[pos + i] += Math.sin(2 * Math.PI * freq * (i / sr)) * 0.6 * env;
-      }
-    }
-    // smooth/filter the buffer
-    for (let i = 2; i < data.length; i++)
-      data[i] = data[i] * 0.7 + data[i - 1] * 0.3;
-  });
-};
+const ALARM_SOUND =
+  "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3";
 
 // --- CONFIG ---
 const THEMES: any = {
@@ -368,16 +237,10 @@ const THEMES: any = {
   },
 };
 
-const ALARM_SOUND =
-  "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3";
-
 export default function App() {
-  // --- USER ACCOUNT STATE ---
   const [user, setUser] = useState<any>(() =>
     JSON.parse(localStorage.getItem("zenUser") || "null")
   );
-
-  // --- APP STATE ---
   const [tasks, setTasks] = useState<any[]>(() =>
     JSON.parse(localStorage.getItem("zenTasks_v6") || "[]")
   );
@@ -393,8 +256,6 @@ export default function App() {
         '["Work", "Study", "Life", "Urgent"]'
     )
   );
-
-  // Preferences
   const [theme, setTheme] = useState(
     () => localStorage.getItem("zenTheme") || "violet"
   );
@@ -405,20 +266,17 @@ export default function App() {
     JSON.parse(
       localStorage.getItem("zenVolumes") ||
         JSON.stringify({
-          lofi: 0.3,
+          lofi: 0.35,
           rain: 0,
           thunder: 0,
+          forest: 0,
           waves: 0,
           brown: 0,
-          forest: 0,
+          master: 0.92,
         })
     )
   );
 
-  const [view, setView] = useState<"list" | "3day" | "month">("list");
-  const [currentDate, setCurrentDate] = useState(new Date());
-
-  // --- TIMER STATE ---
   const [timerMode, setTimerMode] = useState<"focus" | "break">("focus");
   const [workDuration, setWorkDuration] = useState(() =>
     parseInt(localStorage.getItem("zenWorkDur") || "25")
@@ -429,200 +287,50 @@ export default function App() {
   const [timerTime, setTimerTime] = useState(workDuration * 60);
   const [isTimerRunning, setIsTimerRunning] = useState(false);
 
-  // UI States
+  const [view, setView] = useState<"list" | "3day" | "month">("list");
   const [showSoundMixer, setShowSoundMixer] = useState(false);
-  const [inputValue, setInputValue] = useState("");
-  const [selectedTag, setSelectedTag] = useState("Life");
   const [showSettings, setShowSettings] = useState(false);
   const [showHelp, setShowHelp] = useState(false);
-
-  // Login Inputs
+  const [inputValue, setInputValue] = useState("");
+  const [selectedTag, setSelectedTag] = useState("Life");
   const [loginName, setLoginName] = useState("");
   const [loginPin, setLoginPin] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  // --- ENHANCED SOUND ENGINE WITH WEB AUDIO API ---
-  const audioContextRef = useRef<AudioContext | null>(null);
-  // Each ambient channel will have its own gain node
-  const gainNodesRef = useRef<{ [key: string]: GainNode }>({});
-  // Active BufferSource nodes (we restart them when needed)
-  const sourceNodesRef = useRef<{
-    [key: string]: AudioBufferSourceNode | null;
-  }>({});
-  const lofiAudioRef = useRef<HTMLIFrameElement | null>(null);
+  const audioRefs = useRef<any>({});
 
-  // persist a map of buffers so we don't regenerate every time
-  const buffersRef = useRef<{ [key: string]: AudioBuffer | null }>({});
-
-  // Init AudioContext and gains once
   useEffect(() => {
-    const AudioContext =
-      window.AudioContext || (window as any).webkitAudioContext;
-    if (!AudioContext) return;
-
-    const ctx = new AudioContext();
-    audioContextRef.current = ctx;
-
-    // create primary destination gain to allow global control if needed
-    ["rain", "thunder", "waves", "brown", "forest"].forEach((key) => {
-      const gainNode = ctx.createGain();
-      gainNode.gain.value = 0;
-      gainNode.connect(ctx.destination);
-      gainNodesRef.current[key] = gainNode;
-      sourceNodesRef.current[key] = null;
-      buffersRef.current[key] = null;
+    Object.keys(STREAMS).forEach((key) => {
+      const audio = new Audio(STREAMS[key]);
+      audio.loop = true;
+      audio.volume = 0;
+      audioRefs.current[key] = audio;
     });
-
     return () => {
-      // stop all sources and close context on unmount
-      Object.values(sourceNodesRef.current).forEach((s) => {
-        try {
-          s?.stop();
-        } catch {}
+      Object.values(audioRefs.current).forEach((a: any) => {
+        if (a) a.pause();
       });
-      ctx.close().catch(() => {});
-      audioContextRef.current = null;
     };
   }, []);
 
-  // Utility: ensure AudioContext is running (required by many browsers)
-  const resumeAudioContext = async () => {
-    try {
-      const ctx = audioContextRef.current;
-      if (ctx && ctx.state === "suspended") {
-        await ctx.resume();
-      }
-    } catch (e) {
-      // ignore; will try again on interaction
-    }
-  };
-
-  // Start or stop ambient sources according to volumes
   useEffect(() => {
-    const ctx = audioContextRef.current;
-    if (!ctx) return;
+    Object.keys(volumes).forEach((key) => {
+      if (key === "master") return;
+      const audio = audioRefs.current[key];
+      if (!audio) return;
 
-    // helper to start a channel: ensure a buffer exists for channel, create source, connect -> gain and loop
-    const startChannel = async (key: string) => {
-      if (!ctx) return;
-      await resumeAudioContext();
+      audio.volume = volumes[key];
 
-      // if source already running, just set gain
-      if (sourceNodesRef.current[key]) {
-        return;
-      }
-
-      // generate buffer if missing
-      let buffer = buffersRef.current[key];
-      if (!buffer) {
-        switch (key) {
-          case "rain":
-            buffer = generateRainBuffer(ctx, 12);
-            break;
-          case "thunder":
-            buffer = generateThunderBuffer(ctx, 20);
-            break;
-          case "waves":
-            buffer = generateWavesBuffer(ctx, 16);
-            break;
-          case "brown":
-            buffer = generateBrownNoiseBuffer(ctx, 14);
-            break;
-          case "forest":
-            buffer = generateForestBuffer(ctx, 16);
-            break;
-          default:
-            buffer = generateBrownNoiseBuffer(ctx, 10);
+      if (isTimerRunning && volumes[key] > 0) {
+        if (audio.paused) {
+          audio.play().catch(() => void 0);
         }
-        buffersRef.current[key] = buffer;
-      }
-
-      // create source
-      const src = ctx.createBufferSource();
-      src.buffer = buffer!;
-      src.loop = true;
-
-      // apply slight filtering per type for character
-      let nodeOut: AudioNode = src;
-      if (key === "brown") {
-        const lp = ctx.createBiquadFilter();
-        lp.type = "lowpass";
-        lp.frequency.value = 900;
-        lp.Q.value = 0.7;
-        src.connect(lp);
-        nodeOut = lp;
-      } else if (key === "waves") {
-        const bp = ctx.createBiquadFilter();
-        bp.type = "lowpass";
-        bp.frequency.value = 6000;
-        bp.Q.value = 0.7;
-        src.connect(bp);
-        nodeOut = bp;
-      } else if (key === "forest") {
-        const hp = ctx.createBiquadFilter();
-        hp.type = "highpass";
-        hp.frequency.value = 200; // cut lows a bit
-        src.connect(hp);
-        nodeOut = hp;
-      } else if (key === "thunder") {
-        const lpThunder = ctx.createBiquadFilter();
-        lpThunder.type = "lowpass";
-        lpThunder.frequency.value = 1000;
-        lpThunder.Q.value = 0.8;
-        src.connect(lpThunder);
-        nodeOut = lpThunder;
       } else {
-        // default connect directly
-      }
-
-      nodeOut.connect(gainNodesRef.current[key]);
-
-      try {
-        src.start();
-        sourceNodesRef.current[key] = src;
-      } catch (err) {
-        // might have been started/stopped already; ignore
-      }
-    };
-
-    const stopChannel = (key: string) => {
-      const src = sourceNodesRef.current[key];
-      if (src) {
-        try {
-          src.stop();
-        } catch (e) {}
-        sourceNodesRef.current[key] = null;
-      }
-    };
-
-    // update gains and start/stop accordingly
-    ["rain", "thunder", "waves", "brown", "forest"].forEach((key) => {
-      const vol = volumes[key] || 0;
-      const gainNode = gainNodesRef.current[key];
-      if (!gainNode) return;
-      // smooth ramp to target to avoid pops
-      try {
-        gainNode.gain.cancelScheduledValues(0);
-        gainNode.gain.setValueAtTime(gainNode.gain.value, ctx.currentTime);
-        gainNode.gain.linearRampToValueAtTime(vol, ctx.currentTime + 0.25);
-      } catch (e) {
-        gainNode.gain.value = vol;
-      }
-
-      if (vol > 0.001) {
-        startChannel(key).catch(() => {});
-      } else {
-        // schedule stop after fade completes
-        setTimeout(() => {
-          // if volume still zero, stop sources
-          const stillVol = gainNodesRef.current[key]?.gain.value || 0;
-          if (stillVol < 0.001) stopChannel(key);
-        }, 350);
+        if (!audio.paused) audio.pause();
       }
     });
-  }, [volumes]);
+  }, [volumes, isTimerRunning]);
 
-  // --- PERSISTENCE ---
   useEffect(() => {
     if (user) localStorage.setItem("zenTasks_v6", JSON.stringify(tasks));
   }, [tasks, user]);
@@ -648,7 +356,6 @@ export default function App() {
     if (user) localStorage.setItem("zenBreakDur", String(breakDuration));
   }, [breakDuration, user]);
 
-  // --- LOGIC: TIMER ---
   useEffect(() => {
     let interval: any = null;
     if (isTimerRunning && timerTime > 0) {
@@ -657,7 +364,7 @@ export default function App() {
       setIsTimerRunning(false);
       const audio = new Audio(ALARM_SOUND);
       audio.volume = 0.5;
-      audio.play().catch(() => {});
+      audio.play().catch(() => void 0);
       if (timerMode === "focus") {
         setTimerMode("break");
         setTimerTime(breakDuration * 60);
@@ -669,7 +376,6 @@ export default function App() {
     return () => clearInterval(interval);
   }, [isTimerRunning, timerTime, timerMode, workDuration, breakDuration]);
 
-  // --- LOGIC: HELPERS ---
   const isSameDay = (d1: Date, d2: Date) => {
     const a = new Date(d1);
     const b = new Date(d2);
@@ -683,7 +389,6 @@ export default function App() {
   const handleAddTask = (e: any) => {
     e.preventDefault();
     if (!inputValue.trim()) return;
-
     let text = inputValue;
     let date = new Date();
     let priority = "normal";
@@ -692,7 +397,6 @@ export default function App() {
     let time = "";
 
     const lower = text.toLowerCase();
-
     const timeMatch = lower.match(/\bat\s+(\d{1,2}(:\d{2})?(am|pm)?)/i);
     if (timeMatch) {
       time = timeMatch[1];
@@ -700,43 +404,16 @@ export default function App() {
     }
 
     if (lower.includes(" tom ")) {
-      date.setDate(date.getDate() + 1);
+      const d = new Date();
+      d.setDate(d.getDate() + 1);
+      date = d;
       text = text.replace(/ tom /gi, " ");
-    } else if (lower.endsWith(" tom")) {
-      date.setDate(date.getDate() + 1);
-      text = text.replace(/ tom$/gi, " ");
     }
-    if (lower.includes(" tod ")) {
-      text = text.replace(/ tod /gi, " ");
-    } else if (lower.endsWith(" tod")) {
-      text = text.replace(/ tod$/gi, " ");
-    }
-
-    ["mon", "tue", "wed", "thu", "fri", "sat", "sun"].forEach((d) => {
-      const regex = new RegExp(`\\b${d}\\b`, "gi");
-      if (regex.test(text)) {
-        const days = ["sun", "mon", "tue", "wed", "thu", "fri", "sat"];
-        const target = days.indexOf(d.substring(0, 3));
-        const diff = (target + 7 - new Date().getDay()) % 7;
-        const nextDate = new Date();
-        nextDate.setDate(new Date().getDate() + (diff === 0 ? 7 : diff));
-        date = nextDate;
-        text = text.replace(regex, " ");
-      }
-    });
 
     if (lower.includes("!urgent")) {
       priority = "urgent";
       tag = "Urgent";
       text = text.replace(/!urgent/gi, "");
-    }
-    if (lower.includes("!study")) {
-      tag = "Study";
-      text = text.replace(/!study/gi, "");
-    }
-    if (lower.includes("!work")) {
-      tag = "Work";
-      text = text.replace(/!work/gi, "");
     }
     if (lower.includes("!rec")) {
       recurring = true;
@@ -775,19 +452,15 @@ export default function App() {
   };
 
   const activeTheme = THEMES[theme];
-  const formatTime = (s: number) =>
-    `${Math.floor(s / 60)}:${(s % 60).toString().padStart(2, "0")}`;
 
   const downloadData = () => {
     const dataStr =
       "data:text/json;charset=utf-8," +
       encodeURIComponent(JSON.stringify({ tasks, habits, availableTags }));
-    const downloadAnchorNode = document.createElement("a");
-    downloadAnchorNode.setAttribute("href", dataStr);
-    downloadAnchorNode.setAttribute("download", "zen_backup.json");
-    document.body.appendChild(downloadAnchorNode);
-    downloadAnchorNode.click();
-    downloadAnchorNode.remove();
+    const a = document.createElement("a");
+    a.href = dataStr;
+    a.download = "zen_backup.json";
+    a.click();
   };
 
   const handleLogin = () => {
@@ -847,28 +520,9 @@ export default function App() {
     );
   }
 
-  // Build YouTube playlist src from IDs for more variety/infinite loop feel
-  const lofiSrc = `https://www.youtube.com/embed/${
-    LOFI_VIDEO_IDS[0]
-  }?autoplay=1&controls=0&loop=1&playlist=${LOFI_VIDEO_IDS.join(
-    ","
-  )}&modestbranding=1&rel=0&iv_load_policy=3`;
-
   return (
     <div className={`${darkMode ? "dark" : ""} font-sans relative`}>
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
-        {/* Lofi Player (Hidden YouTube iframe) */}
-        {volumes.lofi > 0 && (
-          <iframe
-            ref={lofiAudioRef}
-            title="lofi-player"
-            src={lofiSrc}
-            allow="autoplay"
-            style={{ display: "none" }}
-          />
-        )}
-
-        {/* --- HEADER --- */}
         <div className="bg-white dark:bg-slate-900 border-b dark:border-slate-800 p-4 sticky top-0 z-20 shadow-sm">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
@@ -889,259 +543,108 @@ export default function App() {
                 ))}
               </div>
             </div>
-
             <div className="flex items-center gap-4 relative">
-              {/* Sound Mixer */}
               <button
-                onClick={() => {
-                  setShowSoundMixer(!showSoundMixer);
-                  resumeAudioContext();
-                }}
+                onClick={() => setShowSoundMixer(!showSoundMixer)}
                 className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 ${
                   showSoundMixer ? activeTheme.main : ""
                 }`}
               >
                 <Icon name="headphones" />
               </button>
-
               {showSoundMixer && (
-                <div className="absolute top-12 right-0 w-96 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 z-50">
+                <div className="absolute top-12 right-0 w-80 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 z-50">
                   <h4 className="font-bold text-sm mb-4 flex items-center gap-2 text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    🎵 Soundscapes
+                    Soundscapes
                   </h4>
                   <div className="space-y-4">
-                    {/* Lofi Music */}
                     <div className="flex items-center gap-3">
-                      <div className="w-28 text-xs font-bold opacity-60">
-                        Lofi Music
-                      </div>
-                      <div
-                        className={`p-2 rounded-lg ${
-                          volumes["lofi"] > 0
-                            ? activeTheme.light + " " + activeTheme.main
-                            : "bg-gray-100 dark:bg-slate-700 text-gray-400"
-                        }`}
-                      >
-                        <Icon name="music" size={16} />
-                      </div>
+                      <label className="text-xs w-20">Master</label>
                       <input
                         type="range"
                         min="0"
                         max="1"
-                        step="0.05"
-                        value={volumes["lofi"]}
-                        onChange={(e) => {
+                        step="0.01"
+                        value={volumes.master}
+                        onChange={(e) =>
                           setVolumes({
                             ...volumes,
-                            lofi: parseFloat(e.target.value),
-                          });
-                          resumeAudioContext();
-                        }}
-                        className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
+                            master: parseFloat(e.target.value),
+                          })
+                        }
+                        className="flex-1"
                       />
-                      <span className="text-xs w-8 text-right opacity-60">
-                        {Math.round(volumes["lofi"] * 100)}%
-                      </span>
                     </div>
                     <hr className="dark:border-slate-700" />
-
-                    {/* Rain */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-28 text-xs font-bold opacity-60">
-                        Rain
+                    {[
+                      "lofi",
+                      "rain",
+                      "thunder",
+                      "waves",
+                      "brown",
+                      "forest",
+                    ].map((k) => (
+                      <div key={k} className="flex items-center gap-3">
+                        <div className="w-20 text-xs font-bold opacity-60 capitalize">
+                          {k}
+                        </div>
+                        <div
+                          className={`p-2 rounded-lg ${
+                            (volumes as any)[k] > 0
+                              ? activeTheme.light + " " + activeTheme.main
+                              : "bg-gray-100 dark:bg-slate-700 text-gray-400"
+                          }`}
+                        >
+                          <Icon
+                            name={
+                              k === "lofi"
+                                ? "music"
+                                : k === "rain"
+                                ? "cloud"
+                                : k === "thunder"
+                                ? "bolt"
+                                : k === "forest"
+                                ? "tree"
+                                : k === "waves"
+                                ? "water"
+                                : "noise"
+                            }
+                            size={16}
+                          />
+                        </div>
+                        <input
+                          type="range"
+                          min="0"
+                          max="1"
+                          step="0.1"
+                          value={(volumes as any)[k]}
+                          onChange={(e) =>
+                            setVolumes({
+                              ...volumes,
+                              [k]: parseFloat(e.target.value),
+                            })
+                          }
+                          className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
+                        />
                       </div>
-                      <div
-                        className={`p-2 rounded-lg ${
-                          volumes["rain"] > 0
-                            ? activeTheme.light + " " + activeTheme.main
-                            : "bg-gray-100 dark:bg-slate-700 text-gray-400"
-                        }`}
-                      >
-                        <Icon name="cloudRain" size={16} />
-                      </div>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volumes["rain"]}
-                        onChange={(e) => {
-                          setVolumes({
-                            ...volumes,
-                            rain: parseFloat(e.target.value),
-                          });
-                          resumeAudioContext();
-                        }}
-                        className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
-                      />
-                      <span className="text-xs w-8 text-right opacity-60">
-                        {Math.round(volumes["rain"] * 100)}%
-                      </span>
-                    </div>
-
-                    {/* Thunder */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-28 text-xs font-bold opacity-60">
-                        Thunder
-                      </div>
-                      <div
-                        className={`p-2 rounded-lg ${
-                          volumes["thunder"] > 0
-                            ? activeTheme.light + " " + activeTheme.main
-                            : "bg-gray-100 dark:bg-slate-700 text-gray-400"
-                        }`}
-                      >
-                        <Icon name="zap" size={16} />
-                      </div>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volumes["thunder"]}
-                        onChange={(e) => {
-                          setVolumes({
-                            ...volumes,
-                            thunder: parseFloat(e.target.value),
-                          });
-                          resumeAudioContext();
-                        }}
-                        className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
-                      />
-                      <span className="text-xs w-8 text-right opacity-60">
-                        {Math.round(volumes["thunder"] * 100)}%
-                      </span>
-                    </div>
-
-                    {/* Waves */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-28 text-xs font-bold opacity-60">
-                        Ocean
-                      </div>
-                      <div
-                        className={`p-2 rounded-lg ${
-                          volumes["waves"] > 0
-                            ? activeTheme.light + " " + activeTheme.main
-                            : "bg-gray-100 dark:bg-slate-700 text-gray-400"
-                        }`}
-                      >
-                        <Icon name="waves" size={16} />
-                      </div>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volumes["waves"]}
-                        onChange={(e) => {
-                          setVolumes({
-                            ...volumes,
-                            waves: parseFloat(e.target.value),
-                          });
-                          resumeAudioContext();
-                        }}
-                        className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
-                      />
-                      <span className="text-xs w-8 text-right opacity-60">
-                        {Math.round(volumes["waves"] * 100)}%
-                      </span>
-                    </div>
-
-                    {/* Brown Noise */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-28 text-xs font-bold opacity-60">
-                        Brown Noise
-                      </div>
-                      <div
-                        className={`p-2 rounded-lg ${
-                          volumes["brown"] > 0
-                            ? activeTheme.light + " " + activeTheme.main
-                            : "bg-gray-100 dark:bg-slate-700 text-gray-400"
-                        }`}
-                      >
-                        <Icon name="wind" size={16} />
-                      </div>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volumes["brown"]}
-                        onChange={(e) => {
-                          setVolumes({
-                            ...volumes,
-                            brown: parseFloat(e.target.value),
-                          });
-                          resumeAudioContext();
-                        }}
-                        className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
-                      />
-                      <span className="text-xs w-8 text-right opacity-60">
-                        {Math.round(volumes["brown"] * 100)}%
-                      </span>
-                    </div>
-
-                    {/* Forest */}
-                    <div className="flex items-center gap-3">
-                      <div className="w-28 text-xs font-bold opacity-60">
-                        Forest
-                      </div>
-                      <div
-                        className={`p-2 rounded-lg ${
-                          volumes["forest"] > 0
-                            ? activeTheme.light + " " + activeTheme.main
-                            : "bg-gray-100 dark:bg-slate-700 text-gray-400"
-                        }`}
-                      >
-                        <Icon name="cloud" size={16} />
-                      </div>
-                      <input
-                        type="range"
-                        min="0"
-                        max="1"
-                        step="0.05"
-                        value={volumes["forest"]}
-                        onChange={(e) => {
-                          setVolumes({
-                            ...volumes,
-                            forest: parseFloat(e.target.value),
-                          });
-                          resumeAudioContext();
-                        }}
-                        className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
-                      />
-                      <span className="text-xs w-8 text-right opacity-60">
-                        {Math.round(volumes["forest"] * 100)}%
-                      </span>
-                    </div>
+                    ))}
                   </div>
-                  <p className="text-xs text-gray-400 mt-4 italic">
-                    💡 Improved procedural generators: smoother loop, better
-                    character for each sound. Use small volumes and mix for best
-                    results.
-                  </p>
                 </div>
               )}
-
-              {/* Timer Display */}
               <div className="flex items-center gap-3 bg-gray-100 dark:bg-slate-800 px-3 py-1.5 rounded-full">
                 {timerMode === "break" && (
                   <Icon name="coffee" size={14} className="text-orange-400" />
                 )}
-                <span className="font-mono text-sm font-bold w-10 text-center">
-                  {formatTime(timerTime)}
-                </span>
+                <span className="font-mono text-sm font-bold w-10 text-center">{`${Math.floor(
+                  timerTime / 60
+                )}:${(timerTime % 60).toString().padStart(2, "0")}`}</span>
                 <button
-                  onClick={() => {
-                    resumeAudioContext();
-                    setIsTimerRunning(!isTimerRunning);
-                  }}
+                  onClick={() => setIsTimerRunning(!isTimerRunning)}
                   className={`p-1.5 rounded-full text-white ${activeTheme.bg} hover:opacity-90`}
                 >
                   <Icon name={isTimerRunning ? "pause" : "play"} size={12} />
                 </button>
               </div>
-
               <button
                 onClick={() => setShowSettings(true)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full"
@@ -1159,7 +662,6 @@ export default function App() {
         </div>
 
         <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col lg:flex-row gap-8">
-          {/* SIDEBAR */}
           <div className="w-full lg:w-64 space-y-6">
             <div className="flex items-center gap-3 p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
               <div
@@ -1267,7 +769,6 @@ export default function App() {
             </div>
           </div>
 
-          {/* MAIN AREA */}
           <div className="flex-1">
             <form onSubmit={handleAddTask} className="mb-6 relative group">
               <div className="relative">
@@ -1396,8 +897,8 @@ export default function App() {
                       (_, i) =>
                         i -
                         new Date(
-                          currentDate.getFullYear(),
-                          currentDate.getMonth(),
+                          new Date().getFullYear(),
+                          new Date().getMonth(),
                           1
                         ).getDay() +
                         1
@@ -1406,8 +907,8 @@ export default function App() {
                   const date = new Date();
                   if (view === "month")
                     date.setFullYear(
-                      currentDate.getFullYear(),
-                      currentDate.getMonth(),
+                      new Date().getFullYear(),
+                      new Date().getMonth(),
                       offset
                     );
                   else date.setDate(date.getDate() + offset);
@@ -1573,27 +1074,15 @@ export default function App() {
                   <b>Profile:</b> Data saves to your Name/PIN.
                 </li>
                 <li>
-                  <b>Smart Typing:</b> "Math HW tom at 5pm !urgent" auto-sets
-                  everything.
+                  <b>Smart Typing:</b> &quot;Math HW tom at 5pm !urgent&quot;
+                  auto-sets everything.
                 </li>
                 <li>
                   <b>Timer:</b> Click Settings to change Focus (25m) and Break
                   (5m) durations.
                 </li>
                 <li>
-                  <b>Soundscapes:</b> Click 🎧 to mix Lofi music with ambient
-                  sounds like Rain, Thunder, Ocean waves, Brown Noise and Forest
-                  ambience.
-                </li>
-                <li>
-                  <b>Sounds:</b> All ambient sounds are now generated by
-                  improved procedural buffers (smoother loops, filtered to match
-                  character).
-                </li>
-                <li>
-                  <b>Note:</b> Modern browsers require a user interaction to
-                  allow audio playback. Adjust a slider or press the play button
-                  to activate audio context.
+                  <b>Soundscapes:</b> Click 🎧 to mix Rain/Forest sounds.
                 </li>
               </ul>
               <button
@@ -1607,9 +1096,7 @@ export default function App() {
         )}
 
         <button
-          onClick={() => {
-            setShowHelp(true);
-          }}
+          onClick={() => setShowHelp(true)}
           className={`fixed bottom-6 right-6 p-4 rounded-full shadow-lg text-white hover:scale-105 transition-transform ${activeTheme.bg}`}
         >
           <Icon name="help" size={24} />
