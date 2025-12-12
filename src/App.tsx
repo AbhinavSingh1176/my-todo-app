@@ -40,8 +40,6 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
       </g>
     ),
     moon: <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />,
-    left: <polyline points="15 18 9 12 15 6" />,
-    right: <polyline points="9 18 15 12 9 6" />,
     play: <polygon points="5 3 19 12 5 21 5 3" />,
     pause: (
       <g>
@@ -49,14 +47,39 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
         <rect x="14" y="4" width="4" height="16" />
       </g>
     ),
-    grip: (
+    headphones: (
       <g>
-        <circle cx="9" cy="12" r="1" />
-        <circle cx="9" cy="5" r="1" />
-        <circle cx="9" cy="19" r="1" />
-        <circle cx="15" cy="12" r="1" />
-        <circle cx="15" cy="5" r="1" />
-        <circle cx="15" cy="19" r="1" />
+        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
+        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
+      </g>
+    ),
+    cloud: <path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z" />,
+    bolt: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
+    music: (
+      <g>
+        <path d="M9 18V5l12-2v13" />
+        <circle cx="6" cy="18" r="3" />
+        <circle cx="18" cy="16" r="3" />
+      </g>
+    ),
+    help: (
+      <g>
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <line x1="12" y1="17" x2="12.01" y2="17" />
+      </g>
+    ),
+    x: (
+      <g>
+        <line x1="18" y1="6" x2="6" y2="18" />
+        <line x1="6" y1="6" x2="18" y2="18" />
+      </g>
+    ),
+    download: (
+      <g>
+        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+        <polyline points="7 10 12 15 17 10" />
+        <line x1="12" y1="15" x2="12" y2="3" />
       </g>
     ),
     flame: (
@@ -86,78 +109,6 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
         <line x1="17" y1="16" x2="23" y2="16" />
       </g>
     ),
-    music: (
-      <g>
-        <path d="M9 18V5l12-2v13" />
-        <circle cx="6" cy="18" r="3" />
-        <circle cx="18" cy="16" r="3" />
-      </g>
-    ),
-    help: (
-      <g>
-        <circle cx="12" cy="12" r="10" />
-        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
-        <line x1="12" y1="17" x2="12.01" y2="17" />
-      </g>
-    ),
-    x: (
-      <g>
-        <line x1="18" y1="6" x2="6" y2="18" />
-        <line x1="6" y1="6" x2="18" y2="18" />
-      </g>
-    ),
-    download: (
-      <g>
-        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
-        <polyline points="7 10 12 15 17 10" />
-        <line x1="12" y1="15" x2="12" y2="3" />
-      </g>
-    ),
-    headphones: (
-      <g>
-        <path d="M3 18v-6a9 9 0 0 1 18 0v6" />
-        <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z" />
-      </g>
-    ),
-    cloud: (
-      <path d="M17.5 19c0-1.7-1.3-3-3-3h-1.1c-.2-2.3-2.1-4-4.4-4-1.8 0-3.3 1-4 2.5-2.2.3-3.7 2.4-3.4 4.6.3 1.9 2 3.3 3.9 3.3h12c1.7 0 3-1.3 3-3z" />
-    ),
-    tree: (
-      <g>
-        <path d="M12 10v10" />
-        <path d="M12 10l4-2" />
-        <path d="M12 10l-4-2" />
-        <path d="M12 20V10" />
-        <path d="M7 8l5-6 5 6" />
-        <path d="M6 14l6-6 6 6" />
-      </g>
-    ),
-    water: (
-      <g>
-        <path d="M2 12h20" />
-        <path d="M2 16h20" />
-        <path d="M2 8h20" />
-      </g>
-    ),
-    bolt: <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2" />,
-    lock: (
-      <g>
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </g>
-    ),
-    user: (
-      <g>
-        <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
-        <circle cx="12" cy="7" r="4" />
-      </g>
-    ),
-    clock: (
-      <g>
-        <circle cx="12" cy="12" r="10" />
-        <polyline points="12 6 12 12 16 14" />
-      </g>
-    ),
     coffee: (
       <g>
         <path d="M18 8h1a4 4 0 0 1 0 8h-1" />
@@ -167,10 +118,18 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
         <line x1="14" y1="1" x2="14" y2="4" />
       </g>
     ),
+    water: (
+      <g>
+        <path d="M2 12h20" />
+        <path d="M2 16h20" />
+        <path d="M2 8h20" />
+      </g>
+    ),
     noise: (
       <g>
-        <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
-        <circle cx="12" cy="12" r="3" />
+        <rect x="2" y="2" width="20" height="20" rx="5" />
+        <line x1="12" y1="2" x2="12" y2="22" />
+        <line x1="2" y1="12" x2="22" y2="12" />
       </g>
     ),
   };
@@ -192,26 +151,17 @@ const Icon = ({ name, size = 18, className = "" }: any) => {
   );
 };
 
-// --- SOUND SOURCES ---
-const STREAMS: any = {
-  lofi: "https://cdn.pixabay.com/audio/2022/05/27/audio_1808fbf07a.mp3",
-  rain: "https://assets.mixkit.co/active_storage/sfx/2496/2496-preview.mp3",
-  thunder: "https://assets.mixkit.co/active_storage/sfx/1136/1136-preview.mp3",
-  forest: "https://assets.mixkit.co/active_storage/sfx/243/243-preview.mp3",
-  waves: "https://assets.mixkit.co/active_storage/sfx/1126/1126-preview.mp3",
-  brown: "https://cdn.pixabay.com/audio/2021/08/09/audio_00832bb57a.mp3",
-};
-
+// --- CONFIG ---
 const ALARM_SOUND =
   "https://assets.mixkit.co/active_storage/sfx/2869/2869-preview.mp3";
 
-// --- CONFIG ---
 const THEMES: any = {
   violet: {
     main: "text-violet-600",
     bg: "bg-violet-500",
     border: "border-violet-200",
     light: "bg-violet-50",
+    Hz: "bg-violet-100",
     ring: "focus:border-violet-500",
   },
   blue: {
@@ -219,6 +169,7 @@ const THEMES: any = {
     bg: "bg-blue-500",
     border: "border-blue-200",
     light: "bg-blue-50",
+    Hz: "bg-blue-100",
     ring: "focus:border-blue-500",
   },
   rose: {
@@ -226,6 +177,7 @@ const THEMES: any = {
     bg: "bg-rose-500",
     border: "border-rose-200",
     light: "bg-rose-50",
+    Hz: "bg-rose-100",
     ring: "focus:border-rose-500",
   },
   emerald: {
@@ -233,11 +185,13 @@ const THEMES: any = {
     bg: "bg-emerald-500",
     border: "border-emerald-200",
     light: "bg-emerald-50",
+    Hz: "bg-emerald-100",
     ring: "focus:border-emerald-500",
   },
 };
 
 export default function App() {
+  // --- STATE ---
   const [user, setUser] = useState<any>(() =>
     JSON.parse(localStorage.getItem("zenUser") || "null")
   );
@@ -297,40 +251,480 @@ export default function App() {
   const [loginPin, setLoginPin] = useState("");
   const [loginError, setLoginError] = useState("");
 
-  const audioRefs = useRef<any>({});
+  const currentDate = new Date();
+  const activeTheme = THEMES[theme];
 
-  useEffect(() => {
-    Object.keys(STREAMS).forEach((key) => {
-      const audio = new Audio(STREAMS[key]);
-      audio.loop = true;
-      audio.volume = 0;
-      audioRefs.current[key] = audio;
-    });
-    return () => {
-      Object.values(audioRefs.current).forEach((a: any) => {
-        if (a) a.pause();
-      });
-    };
-  }, []);
+  // ---------- NEW WebAudio ENGINE REFS ----------
+  const audioCtxRef = useRef<AudioContext | null>(null);
+  const masterNodesRef = useRef<any>(null);
+  const channelGainsRef = useRef<Record<string, GainNode>>({});
+  const channelSrcRef = useRef<Record<string, AudioBufferSourceNode | null>>(
+    {}
+  );
+  const bufferCacheRef = useRef<Record<string, AudioBuffer | null>>({});
+  const convolverIRRef = useRef<AudioBuffer | null>(null);
 
-  useEffect(() => {
-    Object.keys(volumes).forEach((key) => {
-      if (key === "master") return;
-      const audio = audioRefs.current[key];
-      if (!audio) return;
+  // ------------------- WebAudio Helpers & Generators --------------------
+  const createStereoBuffer = (
+    ctx: BaseAudioContext,
+    seconds: number,
+    fillFn: (L: Float32Array, R: Float32Array, sr: number) => void
+  ) => {
+    const sr = ctx.sampleRate;
+    const frameCount = Math.max(1, Math.floor(seconds * sr));
+    const buffer = ctx.createBuffer(2, frameCount, sr);
+    const left = buffer.getChannelData(0);
+    const right = buffer.getChannelData(1);
+    fillFn(left, right, sr);
+    const fadeSec = Math.min(0.05, seconds * 0.02);
+    const fadeFrames = Math.floor(fadeSec * sr);
+    for (let i = 0; i < fadeFrames; i++) {
+      const inGain = i / fadeFrames;
+      const outGain = 1 - inGain;
+      left[i] *= inGain;
+      right[i] *= inGain;
+      left[frameCount - 1 - i] *= outGain;
+      right[frameCount - 1 - i] *= outGain;
+    }
+    return buffer;
+  };
 
-      audio.volume = volumes[key];
+  const generateIR = (ctx: BaseAudioContext, seconds = 2, decay = 3) => {
+    const sr = ctx.sampleRate;
+    const length = Math.floor(seconds * sr);
+    const ir = ctx.createBuffer(2, length, sr);
+    for (let ch = 0; ch < 2; ch++) {
+      const channel = ir.getChannelData(ch);
+      for (let i = 0; i < length; i++) {
+        const t = i / sr;
+        channel[i] =
+          (Math.random() * 2 - 1) * Math.pow(1 - t / seconds, decay) * 0.7;
+      }
+    }
+    return ir;
+  };
 
-      if (isTimerRunning && volumes[key] > 0) {
-        if (audio.paused) {
-          audio.play().catch(() => void 0);
-        }
-      } else {
-        if (!audio.paused) audio.pause();
+  const createSoftLimiterCurve = (amount = 1) => {
+    const k = amount;
+    const samples = 44100;
+    const curve = new Float32Array(samples);
+    const deg = Math.PI / 180;
+    for (let i = 0; i < samples; ++i) {
+      const x = (i * 2) / samples - 1;
+      curve[i] = ((3 + k) * x * 20 * deg) / (Math.PI + k * Math.abs(x));
+    }
+    return curve;
+  };
+
+  // Procedural/simple generators
+  const generateBrownBuffer = (ctx: BaseAudioContext, seconds = 14) =>
+    createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      let lastL = 0,
+        lastR = 0;
+      for (let i = 0; i < L.length; i++) {
+        const whiteL = Math.random() * 2 - 1;
+        const whiteR = Math.random() * 2 - 1;
+        lastL = (lastL + 0.02 * whiteL) / 1.02;
+        lastR = (lastR + 0.02 * whiteR) / 1.02;
+        L[i] = lastL * 0.35;
+        R[i] = lastR * 0.35;
+      }
+      for (let i = 2; i < L.length; i++) {
+        L[i] = (L[i] + L[i - 1] * 0.6 + L[i - 2] * 0.35) / 1.95;
+        R[i] = (R[i] + R[i - 1] * 0.6 + R[i - 2] * 0.35) / 1.95;
       }
     });
-  }, [volumes, isTimerRunning]);
 
+  const generateRainBuffer = (ctx: BaseAudioContext, seconds = 12) =>
+    createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      for (let i = 0; i < L.length; i++) {
+        L[i] = 0;
+        R[i] = 0;
+      }
+      const dropletsPerSec = 40 + Math.floor(Math.random() * 40);
+      const totalDroplets = Math.floor(seconds * dropletsPerSec);
+      for (let d = 0; d < totalDroplets; d++) {
+        const pos = Math.floor(Math.random() * L.length);
+        const len = Math.floor(sr * (0.02 + Math.random() * 0.12));
+        const pan = Math.random() * 0.8 - 0.4;
+        for (let j = 0; j < len && pos + j < L.length; j++) {
+          const env = Math.exp(-j / (sr * (0.02 + Math.random() * 0.04)));
+          const noise =
+            (Math.random() * 2 - 1) * env * (0.3 + Math.random() * 0.8);
+          L[pos + j] += noise * (1 - (pan + 1) / 2) * 0.9;
+          R[pos + j] += noise * ((pan + 1) / 2) * 0.9;
+        }
+      }
+      for (let i = 1; i < L.length; i++) {
+        L[i] = L[i] * 0.6 + L[i - 1] * 0.35;
+        R[i] = R[i] * 0.6 + R[i - 1] * 0.35;
+      }
+    });
+
+  const generateWavesBuffer = (ctx: BaseAudioContext, seconds = 16) =>
+    createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      const baseFreq = 0.06 + Math.random() * 0.08;
+      const phaseL = Math.random() * Math.PI * 2;
+      const phaseR = phaseL + 0.5;
+      for (let i = 0; i < L.length; i++) {
+        const t = i / sr;
+        const swellL =
+          0.6 + 0.4 * Math.sin(2 * Math.PI * baseFreq * t + phaseL);
+        const swellR =
+          0.6 + 0.4 * Math.sin(2 * Math.PI * baseFreq * t + phaseR);
+        const surfL = (Math.random() * 2 - 1) * 0.18 * swellL;
+        const surfR = (Math.random() * 2 - 1) * 0.18 * swellR;
+        const rumble = Math.sin(2 * Math.PI * 60 * t) * 0.02;
+        L[i] = surfL + rumble * (0.9 + 0.1 * Math.random());
+        R[i] = surfR + rumble * (0.9 + 0.1 * Math.random());
+      }
+      for (let i = 2; i < L.length; i++) {
+        L[i] = (L[i] + L[i - 1] * 0.6 + L[i - 2] * 0.3) / 1.9;
+        R[i] = (R[i] + R[i - 1] * 0.6 + R[i - 2] * 0.3) / 1.9;
+      }
+    });
+
+  const generateThunderBuffer = (ctx: BaseAudioContext, seconds = 18) =>
+    createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      for (let i = 0; i < L.length; i++) {
+        L[i] = 0;
+        R[i] = 0;
+      }
+      const events = 1 + Math.floor(Math.random() * 3);
+      for (let e = 0; e < events; e++) {
+        const start = Math.floor(Math.random() * (L.length * 0.8));
+        const dur = Math.floor(sr * (1.0 + Math.random() * 3.0));
+        const pan = Math.random() * 0.8 - 0.4;
+        for (let i = 0; i < dur && start + i < L.length; i++) {
+          const env = Math.exp(-i / (sr * (0.6 + Math.random() * 1.6)));
+          const rumble = (Math.random() * 2 - 1) * 0.9 * env;
+          const bright =
+            (Math.random() * 2 - 1) * 0.15 * Math.exp(-i / (sr * 0.03));
+          L[start + i] += rumble * (1 - (pan + 1) / 2) * 0.9 + bright * 0.8;
+          R[start + i] += rumble * ((pan + 1) / 2) * 0.9 + bright * 0.8;
+        }
+      }
+      for (let i = 2; i < L.length; i++) {
+        L[i] = (L[i] + 0.6 * L[i - 1] + 0.3 * L[i - 2]) / 1.9;
+        R[i] = (R[i] + 0.6 * R[i - 1] + 0.3 * R[i - 2]) / 1.9;
+      }
+    });
+
+  const generateForestBuffer = (ctx: BaseAudioContext, seconds = 16) =>
+    createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      for (let i = 0; i < L.length; i++) {
+        const w1 = (Math.random() * 2 - 1) * 0.18;
+        const w2 = (Math.random() * 2 - 1) * 0.14;
+        L[i] = (w1 + w2) * 0.7;
+        R[i] = (w1 * 0.9 + w2 * 0.6) * 0.7;
+      }
+      const chirps = Math.floor(seconds * 1.3);
+      for (let c = 0; c < chirps; c++) {
+        const pos = Math.floor(Math.random() * L.length);
+        const len = Math.floor(sr * (0.05 + Math.random() * 0.22));
+        const startFreq = 700 + Math.random() * 1600;
+        const endFreq = startFreq + (Math.random() * 400 - 200);
+        const pan = Math.random() * 0.8 - 0.4;
+        for (let i = 0; i < len && pos + i < L.length; i++) {
+          const tt = i / len;
+          const freq = startFreq + (endFreq - startFreq) * tt;
+          const env = Math.sin(Math.PI * tt) * Math.exp(-tt * 2);
+          const s = Math.sin(2 * Math.PI * freq * (i / sr)) * env * 0.6;
+          L[pos + i] += s * (1 - (pan + 1) / 2);
+          R[pos + i] += s * ((pan + 1) / 2);
+        }
+      }
+      for (let i = 2; i < L.length; i++) {
+        L[i] = L[i] * 0.7 + L[i - 1] * 0.25;
+        R[i] = R[i] * 0.7 + R[i - 1] * 0.25;
+      }
+    });
+
+  const generateLofiBuffer = (ctx: BaseAudioContext, seconds = 60) =>
+    createStereoBuffer(ctx, seconds, (L, R, sr) => {
+      // Chords
+      const chords = [
+        [220, 277.18, 329.63],
+        [196, 246.94, 329.63],
+        [185, 233.08, 293.66],
+        [174.61, 220, 277.18],
+      ];
+      const chordLen = seconds / chords.length;
+      for (let c = 0; c < chords.length; c++) {
+        const chord = chords[c];
+        const start = Math.floor(c * chordLen * sr);
+        const end = Math.floor((c + 1) * chordLen * sr);
+        for (let i = start; i < end && i < L.length; i++) {
+          const t = i / sr - c * chordLen;
+          let pad = 0;
+          for (let n = 0; n < chord.length; n++) {
+            const freq = chord[n] * (0.5 + 0.5 * (n / (chord.length + 1)));
+            let partial = 0;
+            const detune = 1 + (n - 1) * 0.002;
+            for (let h = 1; h < 8; h++)
+              partial +=
+                (Math.sin(2 * Math.PI * freq * h * t * detune) / h) * 0.6;
+            pad += partial * (0.6 / chord.length);
+          }
+          const env = 0.6 * (0.5 + 0.5 * Math.sin(Math.PI * (t / chordLen)));
+          L[i] += pad * env * (0.9 + 0.1 * Math.cos(t * 0.1));
+          R[i] += pad * env * (0.9 + 0.1 * Math.sin(t * 0.11));
+        }
+      }
+      // Beat
+      const bpm = 70;
+      const beatInterval = 60 / bpm;
+      for (let t = 0; t < seconds; t += beatInterval) {
+        const pos = Math.floor(t * sr);
+        const kickLen = Math.floor(sr * 0.18);
+        for (let i = 0; i < kickLen && pos + i < L.length; i++) {
+          const tt = i / kickLen;
+          const kEnv = Math.exp(-tt * 6);
+          const freq = 60 * (1 - tt * 0.6);
+          const s = Math.sin(2 * Math.PI * freq * (i / sr)) * kEnv * 0.9;
+          L[pos + i] += s * 0.8;
+          R[pos + i] += s * 0.8;
+        }
+        const hatPos = pos + Math.floor(beatInterval * sr * 0.5);
+        const hatLen = Math.floor(sr * 0.04);
+        for (let i = 0; i < hatLen && hatPos + i < L.length; i++) {
+          const env = Math.exp(-i / (sr * 0.01));
+          const noise = (Math.random() * 2 - 1) * env * 0.12;
+          L[hatPos + i] += noise * 0.8;
+          R[hatPos + i] += noise * 0.6;
+        }
+      }
+      // Vinyl Crackle
+      const crackles = Math.floor(seconds * 3);
+      for (let c = 0; c < crackles; c++) {
+        const pos = Math.floor(Math.random() * L.length);
+        const len = Math.floor(sr * (0.01 + Math.random() * 0.05));
+        for (let i = 0; i < len && pos + i < L.length; i++) {
+          const env = Math.exp(-i / (sr * 0.008));
+          const n = (Math.random() * 2 - 1) * env * 0.05;
+          L[pos + i] += n * (0.7 + Math.random() * 0.6);
+          R[pos + i] += n * (0.6 + Math.random() * 0.6);
+        }
+      }
+      // Normalize
+      let max = 0.001;
+      for (let i = 0; i < L.length; i++)
+        max = Math.max(max, Math.abs(L[i]), Math.abs(R[i]));
+      const norm = 0.5 / max;
+      for (let i = 0; i < L.length; i++) {
+        L[i] *= norm;
+        R[i] *= norm;
+      }
+    });
+
+  // ---------------- AudioContext + master chain init --------------------
+  useEffect(() => {
+    const AudioCtor =
+      (window as any).AudioContext || (window as any).webkitAudioContext;
+    if (!AudioCtor) return;
+    const ctx = new AudioCtor();
+    audioCtxRef.current = ctx;
+
+    // master nodes
+    const masterIn = ctx.createGain();
+    const hp = ctx.createBiquadFilter();
+    hp.type = "highpass";
+    hp.frequency.value = 40;
+    const lp = ctx.createBiquadFilter();
+    lp.type = "lowpass";
+    lp.frequency.value = 14000;
+    const convolver = ctx.createConvolver();
+    try {
+      convolver.buffer = generateIR(ctx, 2.0, 3.2);
+      convolverIRRef.current = convolver.buffer;
+    } catch (e) {
+      /* ignore */
+    }
+    const comp = ctx.createDynamicsCompressor();
+    comp.threshold.value = -24;
+    comp.knee.value = 6;
+    comp.ratio.value = 3.5;
+    comp.attack.value = 0.01;
+    comp.release.value = 0.25;
+    const limiter = ctx.createWaveShaper();
+    limiter.curve = createSoftLimiterCurve(2);
+    limiter.oversample = "4x";
+    const masterGain = ctx.createGain();
+    masterGain.gain.value = volumes.master ?? 0.92;
+
+    masterIn.connect(hp);
+    hp.connect(lp);
+    lp.connect(convolver);
+    convolver.connect(comp);
+    comp.connect(limiter);
+    limiter.connect(masterGain);
+    masterGain.connect(ctx.destination);
+
+    masterNodesRef.current = {
+      masterIn,
+      hp,
+      lp,
+      convolver,
+      comp,
+      limiter,
+      masterGain,
+    };
+
+    // per-channel gains
+    ["lofi", "rain", "thunder", "waves", "brown", "forest"].forEach((k) => {
+      const g = ctx.createGain();
+      g.gain.value = 0;
+      g.connect(masterIn);
+      channelGainsRef.current[k] = g;
+      channelSrcRef.current[k] = null;
+      bufferCacheRef.current[k] = null;
+    });
+
+    return () => {
+      Object.values(channelSrcRef.current).forEach((s) => {
+        try {
+          s?.stop();
+        } catch (e) {}
+      });
+      try {
+        ctx.close();
+      } catch (e) {}
+      audioCtxRef.current = null;
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Resume context helper
+  const resumeAudioContext = async () => {
+    try {
+      const ctx = audioCtxRef.current;
+      if (ctx && ctx.state === "suspended") await ctx.resume();
+    } catch (e) {}
+  };
+
+  // Start/stop channels & ramp gains when volumes change ------------------
+  useEffect(() => {
+    const ctx = audioCtxRef.current;
+    if (!ctx) return;
+
+    const startChannel = async (key: string) => {
+      if (!ctx || channelSrcRef.current[key]) return;
+      await resumeAudioContext();
+
+      let buf = bufferCacheRef.current[key];
+      if (!buf) {
+        switch (key) {
+          case "rain":
+            buf = generateRainBuffer(ctx, 12 + Math.random() * 8);
+            break;
+          case "thunder":
+            buf = generateThunderBuffer(ctx, 14 + Math.random() * 10);
+            break;
+          case "waves":
+            buf = generateWavesBuffer(ctx, 12 + Math.random() * 8);
+            break;
+          case "brown":
+            buf = generateBrownBuffer(ctx, 12 + Math.random() * 6);
+            break;
+          case "forest":
+            buf = generateForestBuffer(ctx, 14 + Math.random() * 6);
+            break;
+          case "lofi":
+            buf = generateLofiBuffer(ctx, 60);
+            break;
+          default:
+            buf = generateBrownBuffer(ctx, 12);
+        }
+        bufferCacheRef.current[key] = buf;
+      }
+
+      const src = ctx.createBufferSource();
+      src.buffer = buf!;
+      src.loop = true;
+
+      // gentle per-channel shaping
+      let nodeOut: AudioNode = src;
+      if (key === "brown") {
+        const lp = ctx.createBiquadFilter();
+        lp.type = "lowpass";
+        lp.frequency.value = 900;
+        src.connect(lp);
+        nodeOut = lp;
+      } else if (key === "waves") {
+        const lp = ctx.createBiquadFilter();
+        lp.type = "lowpass";
+        lp.frequency.value = 8000;
+        lp.Q.value = 0.7;
+        src.connect(lp);
+        nodeOut = lp;
+      } else if (key === "forest") {
+        const hp = ctx.createBiquadFilter();
+        hp.type = "highpass";
+        hp.frequency.value = 160;
+        src.connect(hp);
+        nodeOut = hp;
+      } else if (key === "thunder") {
+        const lp = ctx.createBiquadFilter();
+        lp.type = "lowpass";
+        lp.frequency.value = 1200;
+        src.connect(lp);
+        nodeOut = lp;
+      }
+
+      const panner = ctx.createStereoPanner();
+      panner.pan.value = (Math.random() - 0.5) * 0.6;
+      nodeOut.connect(panner);
+      panner.connect(channelGainsRef.current[key]);
+
+      try {
+        src.start();
+      } catch (e) {}
+      channelSrcRef.current[key] = src;
+    };
+
+    const stopChannel = (key: string) => {
+      const s = channelSrcRef.current[key];
+      if (s) {
+        try {
+          s.stop();
+        } catch (e) {}
+        channelSrcRef.current[key] = null;
+      }
+    };
+
+    Object.keys(channelGainsRef.current).forEach((key) => {
+      const desired = volumes[key] || 0;
+      const g = channelGainsRef.current[key];
+      if (!g) return;
+      try {
+        g.gain.cancelScheduledValues(0);
+        g.gain.setValueAtTime(g.gain.value, ctx.currentTime);
+        g.gain.linearRampToValueAtTime(desired, ctx.currentTime + 0.25);
+      } catch (e) {
+        g.gain.value = desired;
+      }
+
+      if (desired > 0.001) startChannel(key).catch(() => {});
+      else
+        setTimeout(() => {
+          if ((channelGainsRef.current[key]?.gain.value || 0) < 0.001)
+            stopChannel(key);
+        }, 300);
+    });
+
+    // master gain
+    try {
+      const mg = masterNodesRef.current.masterGain;
+      mg.gain.cancelScheduledValues(0);
+      mg.gain.setValueAtTime(mg.gain.value, ctx.currentTime);
+      mg.gain.linearRampToValueAtTime(
+        volumes.master ?? 0.92,
+        ctx.currentTime + 0.25
+      );
+    } catch (e) {}
+  }, [volumes]);
+
+  // ------------------ Rest of App UI logic ------------------
   useEffect(() => {
     if (user) localStorage.setItem("zenTasks_v6", JSON.stringify(tasks));
   }, [tasks, user]);
@@ -451,8 +845,6 @@ export default function App() {
     );
   };
 
-  const activeTheme = THEMES[theme];
-
   const downloadData = () => {
     const dataStr =
       "data:text/json;charset=utf-8," +
@@ -481,6 +873,7 @@ export default function App() {
     }
   };
 
+  // ---------- UI ----------
   if (!user) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center p-4 font-sans">
@@ -523,6 +916,7 @@ export default function App() {
   return (
     <div className={`${darkMode ? "dark" : ""} font-sans relative`}>
       <div className="min-h-screen bg-gray-50 dark:bg-slate-950 text-slate-800 dark:text-slate-200 transition-colors duration-300">
+        {/* Header */}
         <div className="bg-white dark:bg-slate-900 border-b dark:border-slate-800 p-4 sticky top-0 z-20 shadow-sm">
           <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between items-center gap-4">
             <div className="flex items-center gap-3">
@@ -543,19 +937,26 @@ export default function App() {
                 ))}
               </div>
             </div>
+
             <div className="flex items-center gap-4 relative">
+              {/* Sound Mixer */}
               <button
-                onClick={() => setShowSoundMixer(!showSoundMixer)}
+                onClick={() => {
+                  setShowSoundMixer(!showSoundMixer);
+                  resumeAudioContext().catch(() => {});
+                }}
                 className={`p-2 rounded-full hover:bg-gray-100 dark:hover:bg-slate-800 ${
                   showSoundMixer ? activeTheme.main : ""
                 }`}
               >
                 <Icon name="headphones" />
               </button>
+
+              {/* Mixer Popup */}
               {showSoundMixer && (
                 <div className="absolute top-12 right-0 w-80 bg-white dark:bg-slate-800 p-5 rounded-2xl shadow-xl border border-gray-100 dark:border-slate-700 z-50">
                   <h4 className="font-bold text-sm mb-4 flex items-center gap-2 text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-                    Soundscapes
+                    🎵 Soundscapes
                   </h4>
                   <div className="space-y-4">
                     <div className="flex items-center gap-3">
@@ -574,6 +975,9 @@ export default function App() {
                         }
                         className="flex-1"
                       />
+                      <div className="w-10 text-right text-xs">
+                        {Math.round((volumes.master || 0) * 100)}%
+                      </div>
                     </div>
                     <hr className="dark:border-slate-700" />
                     {[
@@ -590,7 +994,7 @@ export default function App() {
                         </div>
                         <div
                           className={`p-2 rounded-lg ${
-                            (volumes as any)[k] > 0
+                            volumes[k] > 0
                               ? activeTheme.light + " " + activeTheme.main
                               : "bg-gray-100 dark:bg-slate-700 text-gray-400"
                           }`}
@@ -604,7 +1008,7 @@ export default function App() {
                                 : k === "thunder"
                                 ? "bolt"
                                 : k === "forest"
-                                ? "tree"
+                                ? "cloud"
                                 : k === "waves"
                                 ? "water"
                                 : "noise"
@@ -616,21 +1020,27 @@ export default function App() {
                           type="range"
                           min="0"
                           max="1"
-                          step="0.1"
-                          value={(volumes as any)[k]}
-                          onChange={(e) =>
+                          step="0.01"
+                          value={volumes[k]}
+                          onChange={(e) => {
                             setVolumes({
                               ...volumes,
                               [k]: parseFloat(e.target.value),
-                            })
-                          }
+                            });
+                            resumeAudioContext().catch(() => {});
+                          }}
                           className="flex-1 h-1.5 bg-gray-200 rounded-lg appearance-none cursor-pointer dark:bg-slate-700"
                         />
+                        <div className="w-8 text-xs text-right">
+                          {Math.round((volumes[k] || 0) * 100)}%
+                        </div>
                       </div>
                     ))}
                   </div>
                 </div>
               )}
+
+              {/* Timer / Controls */}
               <div className="flex items-center gap-3 bg-gray-100 dark:bg-slate-800 px-3 py-1.5 rounded-full">
                 {timerMode === "break" && (
                   <Icon name="coffee" size={14} className="text-orange-400" />
@@ -639,12 +1049,16 @@ export default function App() {
                   timerTime / 60
                 )}:${(timerTime % 60).toString().padStart(2, "0")}`}</span>
                 <button
-                  onClick={() => setIsTimerRunning(!isTimerRunning)}
+                  onClick={() => {
+                    resumeAudioContext().catch(() => {});
+                    setIsTimerRunning(!isTimerRunning);
+                  }}
                   className={`p-1.5 rounded-full text-white ${activeTheme.bg} hover:opacity-90`}
                 >
                   <Icon name={isTimerRunning ? "pause" : "play"} size={12} />
                 </button>
               </div>
+
               <button
                 onClick={() => setShowSettings(true)}
                 className="p-2 hover:bg-gray-100 dark:hover:bg-slate-800 rounded-full"
@@ -662,6 +1076,7 @@ export default function App() {
         </div>
 
         <div className="max-w-6xl mx-auto p-4 md:p-8 flex flex-col lg:flex-row gap-8">
+          {/* Sidebar */}
           <div className="w-full lg:w-64 space-y-6">
             <div className="flex items-center gap-3 p-4 bg-white dark:bg-slate-900 rounded-2xl shadow-sm border border-gray-100 dark:border-slate-800">
               <div
@@ -676,6 +1091,7 @@ export default function App() {
                 <p className="font-bold">{user.name}</p>
               </div>
             </div>
+
             <div className="flex flex-col gap-1">
               {["list", "3day", "month"].map((v: any) => (
                 <button
@@ -705,6 +1121,7 @@ export default function App() {
                 </button>
               ))}
             </div>
+
             <div className="bg-white dark:bg-slate-900 p-4 rounded-xl border border-gray-100 dark:border-slate-800">
               <div className="flex justify-between items-center mb-3">
                 <h3 className="font-bold text-sm flex items-center gap-2">
@@ -769,6 +1186,7 @@ export default function App() {
             </div>
           </div>
 
+          {/* Main (tasks) */}
           <div className="flex-1">
             <form onSubmit={handleAddTask} className="mb-6 relative group">
               <div className="relative">
@@ -897,18 +1315,18 @@ export default function App() {
                       (_, i) =>
                         i -
                         new Date(
-                          new Date().getFullYear(),
-                          new Date().getMonth(),
+                          currentDate.getFullYear(),
+                          currentDate.getMonth(),
                           1
                         ).getDay() +
                         1
                     )
-                ).map((offset) => {
+                ).map((offset: any) => {
                   const date = new Date();
                   if (view === "month")
                     date.setFullYear(
-                      new Date().getFullYear(),
-                      new Date().getMonth(),
+                      currentDate.getFullYear(),
+                      currentDate.getMonth(),
                       offset
                     );
                   else date.setDate(date.getDate() + offset);
@@ -964,7 +1382,6 @@ export default function App() {
                   <Icon name="x" />
                 </button>
               </div>
-
               <div className="mb-6">
                 <h4 className="font-bold text-sm mb-3 opacity-60 uppercase flex items-center gap-2">
                   <Icon name="clock" size={14} /> Timer Durations (Mins)
@@ -995,7 +1412,6 @@ export default function App() {
                   </div>
                 </div>
               </div>
-
               <div className="mb-6">
                 <h4 className="font-bold text-sm mb-2 opacity-60 uppercase">
                   Manage Tags
@@ -1042,7 +1458,6 @@ export default function App() {
                   </button>
                 </div>
               </div>
-
               <div className="pt-6 border-t dark:border-slate-800 flex justify-between items-center">
                 <button
                   onClick={() => {
